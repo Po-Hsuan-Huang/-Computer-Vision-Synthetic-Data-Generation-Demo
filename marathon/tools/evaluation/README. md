@@ -1,0 +1,17 @@
+#Evaluation
+
+This folder contains all files required to generate hit counts. 
+
+How to use :
+
+1. put the .xml files containing ground-truth bounding boxes into folder **annotations**.
+
+2. put the **test.txt** into folder **ImageSets/Main/**
+
+3. put the **detections.pkl** into folder **detections**
+
+4. run file main_eval.py
+
+Result:
+
+You will get two lists **dic**, **dic_gt** represnting counts of detectoins and counts of ground truths for each category.
