@@ -28,7 +28,7 @@ for idx, item in enumerate(filelist):
     Pre = Pre.rstrip('.jpg')
     Nex = Nex.rstrip('.jpg') 
     if int(Nex) - int(Pre) != 1 and int(Nex)-int(Pre) > 0:
-        print 'Pre, ', Pre,'Nex, ', Nex
+        print(('Pre, ', Pre,'Nex, ', Nex))
         PreList.append(Pre)
         NexList.append(Nex)
         
@@ -37,8 +37,8 @@ with open('~/pva-faster-rcnn/data/VOCdevkit2007/VOC2007/ImageSets/broken.txt','w
         brockenstring.write(str(pre) + ' '+ str(nex)+"\n")
        
 #        
-#src_pic_list  = sorted.glob.glob('/home/pohsuan/Documents/Marathon2017/data/JPEGImages/TrainSet5/*.jpg')
-#src_xml_list =  sorted.glob.glob('/home/pohsuan/Documents/Marathon2017/data/Annotations/TrainSet5/*.xml')        
+#src_pic_list  = sorted.glob.glob('/home/pohsuanh/Documents/Marathon2017/data/JPEGImages/TrainSet5/*.jpg')
+#src_xml_list =  sorted.glob.glob('/home/pohsuanh/Documents/Marathon2017/data/Annotations/TrainSet5/*.xml')        
 #PreNexList = zip(PreList, NexList)  
 #print len(PreNexList)  
 ## Copy files and put them to the unfilled names in the dst folder.  
@@ -48,15 +48,15 @@ with open('~/pva-faster-rcnn/data/VOCdevkit2007/VOC2007/ImageSets/broken.txt','w
 #        src_xml = src_xml_list.pop(0)
 #        newName = '{:07d}'.format(code) 
 #
-#        dst_pic =  '/home/pohsuan/Documents/Marathon2017/data/JPEGImages/TrainSet5/' + newName+ '.jpg'
-#        dst_xml = '/home/pohsuan/Documents/Marathon2017/data/Annotations/TrainSet5/' + newName + '.xml'
+#        dst_pic =  '/home/pohsuanh/Documents/Marathon2017/data/JPEGImages/TrainSet5/' + newName+ '.jpg'
+#        dst_xml = '/home/pohsuanh/Documents/Marathon2017/data/Annotations/TrainSet5/' + newName + '.xml'
 #        copyfile( src_pic, dst_pic)
 #        copyfile(src_xml, dst_xml)
 #        
 ##%%
 ## concatenate the rest files to the end of the list
 #code = filelist[-1]
-#code = code.lstrip('/home/pohsuan/Documents/Marathon2017/data/Annotations/TrainSet5/')
+#code = code.lstrip('/home/pohsuanh/Documents/Marathon2017/data/Annotations/TrainSet5/')
 #code = code.rstrip('.xml')
 #code = int(code)
 #while  src_pic_list:
@@ -64,8 +64,8 @@ with open('~/pva-faster-rcnn/data/VOCdevkit2007/VOC2007/ImageSets/broken.txt','w
 #        src_xml = src_xml_list.pop(0)
 #        newName = '{:07d}'.format(code) 
 #        print newName
-#        dst_pic =  '/home/pohsuan/Documents/Marathon2017/data/JPEGImages/TrainSet5/' + newName+ '.jpg'
-#        dst_xml = '/home/pohsuan/Documents/Marathon2017/data/Annotations/TrainSet5/' + newName + '.xml'
+#        dst_pic =  '/home/pohsuanh/Documents/Marathon2017/data/JPEGImages/TrainSet5/' + newName+ '.jpg'
+#        dst_xml = '/home/pohsuanh/Documents/Marathon2017/data/Annotations/TrainSet5/' + newName + '.xml'
 #        copyfile( src_pic, dst_pic)
 #        copyfile(src_xml, dst_xml)
 #        code +=1

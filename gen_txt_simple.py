@@ -3,7 +3,7 @@
 """
 Created on Wed Jun 14 15:21:37 2017
 
-@author: pohsuan
+@author: pohsuanh
 """
 
 '''
@@ -41,23 +41,23 @@ start = 1
 stop  = 100000
 dest = 'test.txt'
 
-#files = sorted(glob.glob('/home/pohsuan/Documents/Marathon2017/data/Annotations/TrainSet'+str(folder)+'/*.xml' ))
-#files = sorted(glob.glob('/home/pohsuan/disk1/Marathon/testImages/*jpg' ))
-#src_path ='/home/pohsuan/Documents/Marathon2017/tag_pics/realpho2016phone/'
-src_path ='/home/pohsuan/Desktop/test/'
+#files = sorted(glob.glob('/home/pohsuanh/Documents/Marathon2017/data/Annotations/TrainSet'+str(folder)+'/*.xml' ))
+#files = sorted(glob.glob('/home/pohsuanh/disk1/Marathon/testImages/*jpg' ))
+#src_path ='/home/pohsuanh/Documents/Marathon2017/tag_pics/realpho2016phone/'
+src_path ='/home/pohsuanh/Desktop/test/'
 
 files = sorted(glob.glob( src_path + '*.jpg' ))
 
 #%%
 
-#data_path = '/home/pohsuan/Documents/Marathon2017/data/ImageSets/Main/'+ str(folder) + '/'
-#dest_path = '/home/pohsuan/Documents/Marathon2017/tag_pics/realpho2016phone/'
-dest_path = '/home/pohsuan/Desktop/test/'
+#data_path = '/home/pohsuanh/Documents/Marathon2017/data/ImageSets/Main/'+ str(folder) + '/'
+#dest_path = '/home/pohsuanh/Documents/Marathon2017/tag_pics/realpho2016phone/'
+dest_path = '/home/pohsuanh/Desktop/test/'
 
 
 if os.path.isdir(dest_path):
     if len(glob.glob(dest_path +"*.txt")) != 0 :
-         anw = raw_input( ' Folder not empty ! Want to overwrite ? (Y / N)')  # not empty list considered true
+         anw = eval(input( ' Folder not empty ! Want to overwrite ? (Y / N)'))  # not empty list considered true
          if anw.lower() != "y":
              sys.exit()
 else:
@@ -73,7 +73,7 @@ with open(dest_path + dest, 'w') as g:
         for x in files:
             x = x.split('.xml')[0]
             x = x.split(src_path)[1]
-#            x = x.split('/home/pohsuan/disk1/Marathon/testImages/')[1]
+#            x = x.split('/home/pohsuanh/disk1/Marathon/testImages/')[1]
             x = int(x)
             filename = '{:08d}'.format(x)
             

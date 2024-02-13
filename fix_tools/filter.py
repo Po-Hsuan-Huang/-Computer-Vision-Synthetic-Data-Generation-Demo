@@ -4,7 +4,7 @@ Created on Wed Apr 05 16:58:51 2017
 
 @author: 1609070
 
-@author: pohsuan huang
+@author: pohsuanh huang
 
 parameters :
     folder : string
@@ -40,8 +40,8 @@ for str2 in sorted(glob.glob(os.getcwd()+"/*.xml")):
     try :
         dom = xml.dom.minidom.parse(xmlname)
     except ExpatError as err:
-        print("Error:", err.message[err.code])        
-        print 'junk after document element: ', xmlname 
+        print(("Error:", err.message[err.code]))        
+        print(('junk after document element: ', xmlname)) 
         nnn +=1
         
     #得到文档元素对象
@@ -81,7 +81,7 @@ for str2 in sorted(glob.glob(os.getcwd()+"/*.xml")):
             break
         
     if(nnn>0):
-        print xmlname.strip('.xml')
+        print((xmlname.strip('.xml')))
         f.write(xmlname.strip('.xml')+'\n')
         
 f.close()

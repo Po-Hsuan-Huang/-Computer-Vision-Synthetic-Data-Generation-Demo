@@ -142,7 +142,7 @@ def draw_shade(input_img)  :
 
         # rotation angle of the gradient leaf. positive when rotate clockwise.    
         rotation_angle = -45 + leaf_rotation_angle_base[i] 
-        print i
+        print(i)
 
         leaf = leaf.rotate(rotation_angle, expand =0)
         

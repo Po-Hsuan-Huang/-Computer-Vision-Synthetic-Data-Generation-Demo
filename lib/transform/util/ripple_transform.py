@@ -3,7 +3,7 @@
 """
 Created on Tue Jun 27 16:46:05 2017
 
-@author: pohsuan
+@author: pohsuanh
 """
 
 #!/usr/bin/env python2
@@ -138,7 +138,7 @@ def bndbox_transform(label_pos, tform):
 if __name__ == '__main__':  
     global pad_left
     image = data.astronaut()
-    image = Image.open('/home/pohsuan/Documents/Marathon2017/templates/03.png')
+    image = Image.open('/home/pohsuanh/Documents/Marathon2017/templates/03.png')
     label_pos = [  100, 100, 300, 300]
     
     out, tform =img_transform(image)

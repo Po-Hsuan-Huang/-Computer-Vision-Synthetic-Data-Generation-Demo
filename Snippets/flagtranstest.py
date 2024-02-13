@@ -3,7 +3,7 @@
 """
 Created on Tue Apr 11 15:44:29 2017
 
-@author: pohsuan
+@author: pohsuanh
 """
 
 #!/usr/bin/env python2
@@ -22,7 +22,7 @@ import random
 
 def find_linspace_index(x,y,lin_rows,lin_cols):
 #    print 'linrows', lin_rows
-    print 'atual, ', x, y 
+    print(('atual, ', x, y)) 
     # find the nearest elemet to x, y in the linspaces
     if np.where(lin_rows > x)[0].any():
         index_x = np.where(lin_rows > x)[0][0]
@@ -34,7 +34,7 @@ def find_linspace_index(x,y,lin_rows,lin_cols):
     else :
         index_y = lin_cols[-1]
 #    print 'indices, ', index_x, index_y
-    print 'inline ', lin_rows[index_x], lin_cols[index_y]
+    print(('inline ', lin_rows[index_x], lin_cols[index_y]))
     return index_x, index_y 
     
 def find_map_index(x,y, rows, cols):
@@ -155,15 +155,15 @@ def bndbox_transfrom(frequency,label_pos, image):
     src = np.dstack([src_cols.flat, src_rows.flat])[0]
     
     # find the indices of the coordinates in linspace
-    index_x = range( max( label_pos.shape))
-    index_y = range(len(index_x))
+    index_x = list(range( max( label_pos.shape)))
+    index_y = list(range(len(index_x)))
     
     for i, (x, y) in enumerate (zip (label_pos[0], label_pos[1])):
         index_x[i], index_y[i] = find_linspace_index(x, y, lin_rows, lin_cols)   
     
     # find the indices in the warping map
 
-    idx = range(len(index_x))
+    idx = list(range(len(index_x)))
     for i, (x, y) in enumerate (zip (index_x, index_y)):
         idx[i] = find_map_index( x, y, 20, 10)
      # add sinusoidal oscillation to row coordinates
@@ -194,7 +194,7 @@ def bndbox_transfrom(frequency,label_pos, image):
     for i in idx:
         u.append(dst[i])
     
-    print u
+    print(u)
 
     
 #    dst_label = np.vstack((u0, u1, u2, u3))

@@ -305,7 +305,7 @@ def gen_img(filename, font_list, bg_list):
     text_pos = list ( np.array(newPos) + np.array((paste_x, paste_y, paste_x, paste_y)))
     text_space = 6
     class_labels = ['tag'] + list(C_code) +list(N_code)
-    print class_labels
+    print(class_labels)
     tree = VOCxml( filename +'.jpg', bg, class_labels, img_pos, text_pos, text_space, font_path )    
     tree.write('./Annotations/'+ filename + ".xml") 
     #--------------------------------------------------------------------------
@@ -336,7 +336,7 @@ def give_me_SCC_images(img_num):
         
         filename = '{:07d}'.format(code_no)
     
-        print filename    
+        print(filename)    
         
         with open("./trainval.txt","a") as file:
             file.write(filename+"\n")

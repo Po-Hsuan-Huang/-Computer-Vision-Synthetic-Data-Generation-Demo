@@ -124,7 +124,7 @@ def work(font_list, n, k):
             
         end = time.time()   
             
-        print 'time: ', end-start
+        print(('time: ', end-start))
            
 
 class Worker(Process):          
@@ -139,8 +139,8 @@ class Worker(Process):
           while True:
               job=self.queue.get()
               if not job:
-                  print 'Exiting...', self.name
-                  print 'Job, ', job
+                  print(('Exiting...', self.name))
+                  print(('Job, ', job))
                   self.queue.task_done()
                   break
               
@@ -164,7 +164,7 @@ if __name__ == '__main__':
     
     if SingleProcess:  
         start = time.time()    
-        dst_path = '/home/pohsuan/Documents/Marathon2017/data/raw_targets2/'
+        dst_path = '/home/pohsuanh/Documents/Marathon2017/data/raw_targets2/'
         font_list = glob.glob('./font/*.*')
         
         init_num = 0
@@ -182,17 +182,17 @@ if __name__ == '__main__':
     
         end = time.time()
         
-        print 'time: ', end-start
+        print(('time: ', end-start))
     #%% Main Function Multiprocessing
     if not SingleProcess:
-        print 'Multiprocess...'
+        print('Multiprocess...')
             
         start = time.time()
         job_queue = JoinableQueue()
             
         start = time.time()
         
-        dst_path = '/home/pohsuan/Documents/Marathon2017/data/raw_targets2/'
+        dst_path = '/home/pohsuanh/Documents/Marathon2017/data/raw_targets2/'
         font_list = glob.glob('./font/*.*')
         process_list = []
     
@@ -213,7 +213,7 @@ if __name__ == '__main__':
         job_queue.join()
         end = time.time()   
     
-        print 'time: ', end-start  
+        print(('time: ', end-start))  
     
     
             

@@ -3,7 +3,7 @@
 """
 Created on Tue May  9 14:46:53 2017
 
-@author: pohsuan
+@author: pohsuanh
 
 Data Augmentation
 
@@ -20,11 +20,11 @@ if __name__=='__main__':
     initName = 750000
     imgNum = 10
     
-    imgList = sorted(glob.glob('/home/pohsuan/disk1/Marathon/JPEGImages/TrainSet5/*jpg'))[13457:imgNum+13457]
-    xmlList = sorted(glob.glob('/home/pohsuan/disk1/Marathon/Annotations/TrainSet5/*xml'))[13457:imgNum+13457]
+    imgList = sorted(glob.glob('/home/pohsuanh/disk1/Marathon/JPEGImages/TrainSet5/*jpg'))[13457:imgNum+13457]
+    xmlList = sorted(glob.glob('/home/pohsuanh/disk1/Marathon/Annotations/TrainSet5/*xml'))[13457:imgNum+13457]
      
-    img_dst_path = '/home/pohsuan/disk1/Marathon/JPEGImages/TrainSet6/'
-    xml_dst_path = '/home/pohsuan/disk1/Marathon/Annotations/TrainSet6/'
+    img_dst_path = '/home/pohsuanh/disk1/Marathon/JPEGImages/TrainSet6/'
+    xml_dst_path = '/home/pohsuanh/disk1/Marathon/Annotations/TrainSet6/'
     
     Hue = False
     Saturation = False
@@ -33,18 +33,18 @@ if __name__=='__main__':
     
     for j , img in enumerate(imgList):
         
-        xmltag = xmlList[j].lstrip('/home/pohsuan/disk1/Marathon/Annotations/TrainSet5/').rstrip('.xml')
-        imgtag =imgList[j].lstrip('/home/pohsuan/disk1/Marathon/JPEGImages/TrainSet5/').rstrip('.jpg')
-        print imgtag
+        xmltag = xmlList[j].lstrip('/home/pohsuanh/disk1/Marathon/Annotations/TrainSet5/').rstrip('.xml')
+        imgtag =imgList[j].lstrip('/home/pohsuanh/disk1/Marathon/JPEGImages/TrainSet5/').rstrip('.jpg')
+        print(imgtag)
         if xmltag == imgtag:
             
             
             img = cv2.imread(img)
-#            img = cv2.imread('/home/pohsuan/disk1/Marathon/JPEGImages/TrainSet5/0400010.jpg')
+#            img = cv2.imread('/home/pohsuanh/disk1/Marathon/JPEGImages/TrainSet5/0400010.jpg')
             hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
             hsv2 = hsv.copy()
             if Hue :
-                print 'Hue'
+                print('Hue')
                 # control hue
                 hueMax = np.ones(img.shape[:2]) * 180
                 hueMin = np.zeros(img.shape[:2])
@@ -54,7 +54,7 @@ if __name__=='__main__':
                 hsv2[:,:,0] = hue_map    
                 
             if Saturation : 
-                print 'Satur'
+                print('Satur')
                 # control saturation
                 satMax = np.ones(img.shape[:2]) * 255
                 satMin = np.zeros(img.shape[:2])
@@ -64,7 +64,7 @@ if __name__=='__main__':
                 hsv2[:,:,1] = sat_map  
                 
             if Value :
-                print 'value'
+                print('value')
                 # control brightness
                 valMax = np.ones(img.shape[:2]) * 255
                 valMin = np.zeros(img.shape[:2])
@@ -74,14 +74,14 @@ if __name__=='__main__':
                 hsv2[:,:,2] = val_map      
         
             if Blur :
-               print 'blur'
+               print('blur')
                # control ))
                kx = np.random.randint(5,10)
                ky = np.random.randint(5,10)
                ksize = (kx,ky)
                hsv2 = cv2.blur(hsv2, ksize)
             if Contrast :
-                print 'Contrast'
+                print('Contrast')
                 
                 
             new_img =  cv2.cvtColor(hsv2.astype(np.uint8) , cv2.COLOR_HSV2RGB)
@@ -94,5 +94,5 @@ if __name__=='__main__':
     
 #            copyfile(xmlList[j], xml_dst_path + filename +'.xml')
         else :
-            print 'discontinoity in filenames : ', imgtag
+            print(('discontinoity in filenames : ', imgtag))
             xmlList.insert(j,'NAL')

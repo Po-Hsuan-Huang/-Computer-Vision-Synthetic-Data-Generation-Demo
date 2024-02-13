@@ -55,9 +55,9 @@ if isTest:
     dest = 'test.txt'
     
 '''MULTI_GEN'''    
-files = sorted(glob.glob('/home/pohsuan/Documents/Marathon2017/data/Annotations/TrainSet'+str(folder)+'/*.xml' ))
+files = sorted(glob.glob('/home/pohsuanh/Documents/Marathon2017/data/Annotations/TrainSet'+str(folder)+'/*.xml' ))
 
-print 'file not empty ', len(files)
+print(('file not empty ', len(files)))
 
 #%%
 list_ecpt = []
@@ -69,7 +69,7 @@ with open('/home/acer/Documents/Marathon/data/ImageSets/broken.txt', 'r') as f :
 data_path = '/home/acer/Documents/Marathon/data/ImageSets/Main/'+ str(folder) + '/'
 if os.path.isdir(data_path):
     if len(glob.glob(data_path +"*.txt")) != 0 :
-         anw = raw_input( ' Folder not empty ! Want to overwrite ? (Y / N)')  # not empty list considered true
+         anw = eval(input( ' Folder not empty ! Want to overwrite ? (Y / N)'))  # not empty list considered true
          if anw.lower() != "y":
              sys.exit()
 else:
@@ -79,7 +79,7 @@ else:
 with open(data_path + dest, 'w') as g:
 #%% 
     exceptions = np.sort(exceptions)
-    print 'size of broken files ', len(exceptions)
+    print(('size of broken files ', len(exceptions)))
     for x in exceptions:
         x = int(x)
         list_ecpt.append(x) 

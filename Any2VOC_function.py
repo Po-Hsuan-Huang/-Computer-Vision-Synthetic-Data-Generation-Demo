@@ -56,7 +56,7 @@ def CreateTrainData(imgroot, max_wsize, max_hsize, degrees_set, xmin, ymin, xmax
         
     for folder_name in os.listdir(imgroot):
         classN += 1
-        print '{} {}'.format(classN, folder_name)
+        print(('{} {}'.format(classN, folder_name)))
         # Create Labeling Tags
         with open(Tag_path+"predefined_classes.txt","a") as file:
             file.write(folder_name+"\n")

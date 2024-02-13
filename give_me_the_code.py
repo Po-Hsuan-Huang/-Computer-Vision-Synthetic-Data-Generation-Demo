@@ -229,7 +229,7 @@ def gen_img(filename, font_list, bg_list):
     paste_size_w = img_w
     paste_size_h = img_h
     
-    print 'paste_size : ', paste_size_h, paste_size_w
+    print(('paste_size : ', paste_size_h, paste_size_w))
 #    resize_ratio = float(paste_size_w) / float(img_w)
     
 #    code_w = int( code_w * resize_ratio )
@@ -325,7 +325,7 @@ def give_me_SCC_images(img_num):
         
         filename = '{:07d}'.format(code_no)
     
-        print filename    
+        print(filename)    
         
         with open("./trainval.txt","a") as file:
             file.write(filename+"\n")

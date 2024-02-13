@@ -3,7 +3,7 @@
 """
 Created on Fri Jun 16 14:02:27 2017
 
-@author: pohsuan
+@author: pohsuanh
 """
 
 from skimage import data

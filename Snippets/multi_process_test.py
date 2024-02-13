@@ -3,7 +3,7 @@
 """
 Created on Fri May 12 15:25:09 2017
 
-@author: pohsuan
+@author: pohsuanh
 Multiprocess JoinableQueue Practice
 
 """
@@ -13,14 +13,14 @@ from multiprocessing import Process, cpu_count, JoinableQueue
 
 def worker(queue):
       job = queue.get()
-      print job
+      print(job)
       queue.task_done()
 
 if __name__ == '__main__':
 
      job_queue = JoinableQueue()
      # mock to put ads inside
-     jobs = range(100)         
+     jobs = list(range(100))         
 
      for job in jobs : job_queue.put(job)
       
@@ -36,9 +36,9 @@ if __name__ == '__main__':
          for i, p in enumerate(process_list):
              if not job_queue.empty():
                  p.run()
-                 print p.name
+                 print((p.name))
              else:
-                 print 'empty'
+                 print('empty')
                  break
                      
      for p in process_list: p.join()            

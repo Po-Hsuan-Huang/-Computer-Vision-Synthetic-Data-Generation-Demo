@@ -61,7 +61,7 @@ def draw_shade(imput_img, num_leaf, **kwargs):
     Color = 0 # default color
     Random_Color = False
     if kwargs is not None:
-        for key, value in kwargs.iteritems(): 
+        for key, value in list(kwargs.items()): 
                 key = value
 
         

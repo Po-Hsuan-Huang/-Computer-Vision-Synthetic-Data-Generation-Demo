@@ -2,7 +2,7 @@
 """
 Created on Mon Aug  8 11:05:02 2016
 
-@author: Pohsuan & Gene
+@author: pohsuanh & Gene
 """
 #
 #from gen_images import *
@@ -39,13 +39,13 @@ import numpy as np
 
 def work(n, n0,  data_path, label_path, text_path): 
             global start
-            print 'gen-data...', n, n0        
+            print('gen-data...', n, n0)        
             GenData_many_targets(n, n0, data_path, label_path, text_path)
-            print 'gen-data2...'        
+            print('gen-data2...')        
 
             end = time.time()   
 
-            print 'time: ', end-start          
+            print('time: ', end-start)          
 
 if __name__ == '__main__':
     global start
@@ -57,11 +57,7 @@ if __name__ == '__main__':
     SYNC = False
     # number of training data 
     
-<<<<<<< Temporary merge branch 1
     train_num = 400000
-=======
-    train_num = 100000
->>>>>>> Temporary merge branch 2
     
     # number of testing data
     
@@ -102,7 +98,7 @@ if __name__ == '__main__':
     
     ''' Check if the folders exist && empty. If not, create a new folder.'''
     if Gen_train_data :
-        print 'Gen_train_data'
+        print('Gen_train_data')
     
         if os.path.isdir(train_data_path):
             if len(glob.glob(train_data_path +"*.jpg")) != 0 :
@@ -121,7 +117,7 @@ if __name__ == '__main__':
             os.makedirs(train_label_path)
     
     if Gen_test_data:
-        print 'Gen_test_data'
+        print('Gen_test_data')
         
         if os.path.isdir(test_data_path):
             if len(glob.glob(test_data_path +"*.jpg")) != 0 :
@@ -184,36 +180,26 @@ if __name__ == '__main__':
                 
                 n = train_num/Max_core
                 n0 = Initial_name_train + k*n
-<<<<<<< Temporary merge branch 1
                  
                 if k == Max_core-1 : 
                     get_sync(SYNC) # synching is executed in the parent process 
-                    print 'ParentProcess...'
+                    print('ParentProcess...')
                     GenData_many_targets(train_num, Initial_name_train, train_data_path, train_label_path, text_data_path)
-=======
-                np.random.seed()
-#                print np.random.get_state() each process should have different seed
-                if k == Max_core-1 : 
-                    get_sync(SYNC) # synching is executed in the parent process 
-                    print 'ParentProcess...'
-                    GenData_many_targets(n, Initial_name_train, train_data_path, train_label_path, text_data_path)
-                
->>>>>>> Temporary merge branch 2
                 elif k == 0 :
                     n = train_num/Max_core + train_num % Max_core
                     get_sync(False)
                     p = Process(target=work, args = (n, n0, train_data_path, train_label_path, text_data_path))
                     jobs.append(p)
                     p.start()
-                    print 'ChildProcess...',k
+                    print('ChildProcess...',k)
                 else:
                     get_sync(False)
                     p = Process(target=work, args = (n, n0, train_data_path, train_label_path, text_data_path))
                     jobs.append(p)
                     p.start()
-                    print 'ChildProcess...',k
+                    print('ChildProcess...',k)
 
-                print 'core:',k
+                print('core:',k)
             
             
             for p in jobs:
@@ -235,7 +221,7 @@ if __name__ == '__main__':
 
                 if k == Max_core-1 : 
                     get_sync(SYNC)
-                    print 'ParentProcess...'
+                    print('ParentProcess...')
                     GenData_many_targets(n, Initial_name_test, test_data_path, test_label_path, text_data_path)
 
                 elif k == 0 :
@@ -244,15 +230,15 @@ if __name__ == '__main__':
                     p = Process(target=work, args = (n, n0, train_data_path, train_label_path, text_data_path))
                     jobs.append(p)
                     p.start()
-                    print 'ChildProcess...',k
+                    print('ChildProcess...',k)
                 else:
                     get_sync(False)
                     p = Process(target = work , args = (n, n0, test_data_path, test_label_path, text_data_path))
                     jobs.append(p)
                     p.start()
-                    print 'ChildProcess...', k
+                    print('ChildProcess...', k)
 
-                print 'core:',k
+                print('core:',k)
 
             
             for p in jobs:

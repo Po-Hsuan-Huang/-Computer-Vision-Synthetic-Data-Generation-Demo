@@ -98,7 +98,7 @@ if __name__ == '__main__':
 
         # rotation angle of the gradient leaf. positive when rotate clockwise.    
         rotation_angle = -(np.random.randint(0,180))
-        print i
+        print(i)
 
         leaf = leaf.rotate(rotation_angle, expand =0)
         
@@ -115,7 +115,7 @@ if __name__ == '__main__':
     screen.paste(temp,( screen_w/2 - temp_w/2, screen_h/2 - temp_h/2))
     alpha = mask.split[-1]
     mask = mask.putalpha(alpha)
-    print screen.mode, mask.mode
+    print((screen.mode, mask.mode))
     screen = Image.alpha_composite(screen, mask)
     
     mask_copy.show()

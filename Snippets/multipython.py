@@ -3,7 +3,7 @@
 """
 Created on Mon May  8 16:04:35 2017
 
-@author: pohsuan
+@author: pohsuanh
 """
 
 from give_me_the_code import *
@@ -75,11 +75,11 @@ class Writer(multiprocessing.Process):
 
         while count < num:
             filename, image, annotation = self.result_queue.get()
-            print '%s receive %s' % (proc_name, filename)
+            print(('%s receive %s' % (proc_name, filename)))
             image_txn.put(filename, image)
             annotation_txn.put(filename, annotation)
             count = count + 1
-            print count
+            print(count)
 
             if count % 1000 == 0:
                 image_txn.commit()
@@ -88,14 +88,14 @@ class Writer(multiprocessing.Process):
                 annotation_txn = annotation_env.begin(write=True)
 
 
-        print 'writer %s: commit last' % proc_name
+        print(('writer %s: commit last' % proc_name))
         if count % 1000 != 0:
             image_txn.commit()
             annotation_txn.commit()
 
         image_env.close()
         annotation_env.close()
-        print 'writer %s: Exiting' % proc_name
+        print(('writer %s: Exiting' % proc_name))
 
 
 class Consumer(multiprocessing.Process):
@@ -118,10 +118,10 @@ class Consumer(multiprocessing.Process):
             next_task = self.task_queue.get()
             if next_task is None:
                 # Poison pill means shutdown
-                print '%s: Exiting' % proc_name
+                print(('%s: Exiting' % proc_name))
                 self.task_queue.task_done()
                 break
-            print '%s: %s' % (proc_name, next_task)
+            print(('%s: %s' % (proc_name, next_task)))
             answer = next_task(im_noises, bg_list)
             self.task_queue.task_done()
             self.result_queue.put(answer)
@@ -155,8 +155,8 @@ for filename in filenames:
 tasks = JoinableQueue()
 results = Queue()
 num_consumers = multiprocessing.cpu_count() * 2
-print 'Creating %d consumers' % num_consumers
-consumers = [ Consumer(tasks, results) for i in xrange(num_consumers) ]
+print(('Creating %d consumers' % num_consumers))
+consumers = [ Consumer(tasks, results) for i in range(num_consumers) ]
 for w in consumers:
     w.start()
 
@@ -168,8 +168,8 @@ for i in range(0, len(filenames)):
 tasks.join()
 
 
-for i in xrange(num_consumers):
+for i in range(num_consumers):
     tasks.put(None)
 
 writer.join()
-print("--- %s seconds ---" % (time.time() - start_time))
+print(("--- %s seconds ---" % (time.time() - start_time)))

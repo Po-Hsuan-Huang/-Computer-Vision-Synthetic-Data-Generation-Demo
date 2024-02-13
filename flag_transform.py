@@ -12,8 +12,8 @@ from skimage.transform import PiecewiseAffineTransform, warp
 from skimage import data
 
 def find_linspace_index(x,y,lin_rows,lin_cols):
-    print 'linrows', lin_rows
-    print 'atual, ', x, y 
+    print(('linrows', lin_rows))
+    print(('atual, ', x, y)) 
     # find the nearest elemet to x, y in the linspaces
     if np.where(lin_rows > x)[0].any():
         index_x = np.where(lin_rows > x)[0][0]

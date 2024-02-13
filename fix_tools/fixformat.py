@@ -3,7 +3,7 @@
 """
 Created on Mon May 15 09:59:28 2017
 
-@author: pohsuan
+@author: pohsuanh
 
 Fix the junk xml corrupted with worng xml format.
 
@@ -13,8 +13,8 @@ junkxml.txt is created with test.py on server169 root dir.
 
 """
 
-f = open('/home/pohsuan/disk1/Marathon/ImageSets/Main/5/junkxml.txt', 'r')
-h = open('/home/pohsuan/disk1/Marathon/ImageSets/Main/5/junkxml2.txt', 'w')
+f = open('/home/pohsuanh/disk1/Marathon/ImageSets/Main/5/junkxml.txt', 'r')
+h = open('/home/pohsuanh/disk1/Marathon/ImageSets/Main/5/junkxml2.txt', 'w')
 word = ''
 for i, text in enumerate(list(f.readline())):
     i=i+1

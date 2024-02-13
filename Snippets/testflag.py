@@ -3,7 +3,7 @@
 """
 Created on Thu Apr 27 09:48:41 2017
 
-@author: pohsuan
+@author: pohsuanh
 """
 
 from PIL import Image, ImageDraw
@@ -17,7 +17,7 @@ from skimage import data
 sine_amp = 70
 
 image = data.astronaut()
-image = Image.open('/home/pohsuan/Documents/Marathon2017/templates/06p.png')
+image = Image.open('/home/pohsuanh/Documents/Marathon2017/templates/06p.png')
 image = np.array(image)
 
 image = np.pad(image, ((sine_amp, sine_amp),(0,0),(0,0)), 'constant', constant_values=((0,0),(0,0),(0,0)))

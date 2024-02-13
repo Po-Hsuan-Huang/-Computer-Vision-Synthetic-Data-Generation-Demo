@@ -26,7 +26,7 @@ def gen_gray():
         filename = filename.rstrip('.jpeg')
         filename = filename.rstrip('.png')
 
-        print filename
+        print(filename)
         image = Image.open(img_path)
         if image.mode != 'L':
             image = image.convert(mode = 'L')

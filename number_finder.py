@@ -3,7 +3,7 @@
 """
 Created on Mon Jul 10 16:52:49 2017
 
-@author: pohsuan
+@author: pohsuanh
 
 Draw detected texts on the tag images.
 
@@ -74,10 +74,10 @@ def NMS(seq):
     iou_thres = 0.5
     n = 0
     while n < len(pos_seq)-1:
-        print n, len(pos_seq)
+        print((n, len(pos_seq)))
         if IOU(pos_seq[n]['pos'], pos_seq[n+1]['pos']) >= iou_thres:
            # compare conf
-            print 'ha'
+            print('ha')
             if pos_seq[n]['conf'] >= pos_seq[n+1]['conf']:
                 pos_seq.pop(n+1)  
             else :
@@ -92,11 +92,11 @@ def NMS(seq):
 step2 = True
 if step2 :   
     # for phon2016step2
-    pkl_path = '/home/pohsuan/Documents/Marathon2017/detections/detects-phone2016-step2/'
-    txt_path = '/home/pohsuan/Documents/Marathon2017/detections/detects-phone2016-step2/'
-    img_path = '/home/pohsuan/Documents/Marathon2017/tag_pics/realpho2016phone/'
-    bg_img_path = '/home/pohsuan/Documents/Marathon2017/detections/detects-phone2016/'
-    dest_path = '/home/pohsuan/Documents/Marathon2017/detections/detects-phone2016-step2/' 
+    pkl_path = '/home/pohsuanh/Documents/Marathon2017/detections/detects-phone2016-step2/'
+    txt_path = '/home/pohsuanh/Documents/Marathon2017/detections/detects-phone2016-step2/'
+    img_path = '/home/pohsuanh/Documents/Marathon2017/tag_pics/realpho2016phone/'
+    bg_img_path = '/home/pohsuanh/Documents/Marathon2017/detections/detects-phone2016/'
+    dest_path = '/home/pohsuanh/Documents/Marathon2017/detections/detects-phone2016-step2/' 
 with open(txt_path +'test.txt') as f:
     data = f.readlines()
 with open(pkl_path + 'detections.pkl', 'rb') as f1:
@@ -120,7 +120,7 @@ cls_name=[
 images  = sorted(glob.glob( img_path+ "*.jpg" ) )
 
 for i, img in enumerate(images):
-    print('%d/%d'%(i,len(images)))
+    print(('%d/%d'%(i,len(images))))
     imgname=data[i]
     kk=imgname[:imgname.find("\n")]
     jpgname='%s.jpg'%(kk)

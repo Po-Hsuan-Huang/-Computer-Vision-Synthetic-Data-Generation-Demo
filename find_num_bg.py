@@ -3,7 +3,7 @@
 """
 Created on Tue Jul 11 16:19:10 2017
 
-@author: pohsuan
+@author: pohsuanh
 
 
 Draw detectoin on the raw image.
@@ -29,7 +29,7 @@ This will be used to generated the final result of Marathon WJS project.
 from PIL import Image, ImageFont, ImageDraw
 import os, glob
 import numpy as np
-import cPickle as pickle
+import pickle as pickle
 
 def IOU(a,b):
     '''
@@ -67,10 +67,10 @@ def NMS(seq):
     iou_thres = 0.5
     n = 0
     while n < len(pos_seq)-1:
-        print n, len(pos_seq)
+        print((n, len(pos_seq)))
         if IOU(pos_seq[n]['pos'], pos_seq[n+1]['pos']) >= iou_thres:
            # compare conf
-            print 'ha'
+            print('ha')
             if pos_seq[n]['conf'] >= pos_seq[n+1]['conf']:
                 pos_seq.pop(n+1)  
             else :
@@ -92,11 +92,11 @@ if __name__ == '__main__':
     
                       
     # for phon2016step2
-    pkl_path = '/home/pohsuan/Documents/Marathon2017/detections/detects-phone2016-step2/'
-    txt_path = '/home/pohsuan/Documents/Marathon2017/tag_pics/realpho2016phone/'
-    img_path = '/home/pohsuan/Documents/Marathon2017/detections/detects-phone2016/'
-    tag_path = '/home/pohsuan/Documents/Marathon2017/tag_pics/realpho2016phone/'
-    dest_path = '/home/pohsuan/Documents/Marathon2017/detections/detects-phone2016-step2/' 
+    pkl_path = '/home/pohsuanh/Documents/Marathon2017/detections/detects-phone2016-step2/'
+    txt_path = '/home/pohsuanh/Documents/Marathon2017/tag_pics/realpho2016phone/'
+    img_path = '/home/pohsuanh/Documents/Marathon2017/detections/detects-phone2016/'
+    tag_path = '/home/pohsuanh/Documents/Marathon2017/tag_pics/realpho2016phone/'
+    dest_path = '/home/pohsuanh/Documents/Marathon2017/detections/detects-phone2016-step2/' 
     
     #tagx1,tagy1, tagx2, tagy2 = tag_pos[i]
     #paste_pos = ( 1.1*tagx1, 1.1*tagy1)
@@ -119,7 +119,7 @@ if __name__ == '__main__':
     img = None
     
     for i, child_obj in enumerate(imgbox[1]): 
-        print('%d/%d'%(i,len(imgbox[1])))
+        print(('%d/%d'%(i,len(imgbox[1]))))
         imgname=data[i]
         kk=imgname[:imgname.find("\n")][:7] # BG image name
         jpgname='%s.jpg'%(kk)

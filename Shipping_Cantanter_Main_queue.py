@@ -3,14 +3,14 @@
 """
 Created on Mon May 15 16:42:38 2017
 
-@author: pohsuan
+@author: pohsuanh
 """
 
 # -*- coding: utf-8 -*-
 """
 Created on Mon Aug  8 11:05:02 2016
 
-@author: Pohsuan & Gene
+@author: pohsuanh & Gene
 """
 #
 #from gen_images import *
@@ -59,22 +59,32 @@ class Worker(Process):
           while True:
               job=self.queue.get()
               if not job:
-                  print 'Exiting...', self.name
-                  print 'Job, ', job
+                  print(('Exiting...', self.name))
+                  print(('Job, ', job))
                   self.queue.task_done()
                   break
               else :
-                  print 'working... ',job[0]
+                  print(('working... ',job[0]))
                   GenData_many_targets(1,job[0], job[1], job[2], job[3])
                   self.queue.task_done()              
           
           
 if __name__ == '__main__':
+
+    # Get the directory containing the script
+    script_dir = os.path.dirname(os.path.realpath(__file__))
+
+    # Add the script directory to the Python path
+    sys.path.append(script_dir)
+
+    os.chdir(os.path.dirname(os.path.realpath(__file__)))
+
+
     global start
     
     Gen_train_data = True
     Gen_test_data = False
-    SingleProcess = False
+    SingleProcess = True
     Overwrite = True
     SYNC = False
     # number of training data 
@@ -89,7 +99,7 @@ if __name__ == '__main__':
     
     SycBatchSize = 200
     
-    # initial name for traiyning
+    # initial name for training
     Initial_name_train = 50300
     
     # initial name for testing
@@ -104,25 +114,25 @@ if __name__ == '__main__':
     ''' The folders must be created beforehand, remember not to overwrite'''
     
     # trian annotation data path
-    train_label_path = '/home/pohsuan/disk1/Marathon/Annotations/TrainSet8/' 
+    train_label_path = '/home/pohsuanh/disk1/Marathon/Annotations/TrainSet8/' 
     # test annotation data path
-    test_label_path = '/home/pohsuan/disk1/Marathon/Annotations/TestSet8/' 
+    test_label_path = '/home/pohsuanh/disk1/Marathon/Annotations/TestSet8/' 
     # train_data_output_path
-    train_data_path = '/home/pohsuan/disk1/Marathon/JPEGImages/TrainSet8/'
+    train_data_path = '/home/pohsuanh/disk1/Marathon/JPEGImages/TrainSet8/'
     # test_data_output_path
-    test_data_path =  '/home/pohsuan/disk1/Marathon/JPEGImages/TestSet8/'
+    test_data_path =  '/home/pohsuanh/disk1/Marathon/JPEGImages/TestSet8/'
     
     # index file tracking whom should be trained and whom should be tested
-    text_data_path = '/home/pohsuan/disk1/Marathon/ImageSets/Main/8/' 
+    text_data_path = '/home/pohsuanh/disk1/Marathon/ImageSets/Main/8/' 
 
     
     ''' Check if the folders exist && empty. If not, create a new folder.'''
     if Gen_train_data :
-        print 'Gen_train_data'
+        print('Gen_train_data')
     
         if os.path.isdir(train_data_path):
             if len(glob.glob(train_data_path +"*.jpg")) != 0 :
-                 anw = raw_input( 'TrainData Folder not empty ! Want to overwrite ? (Y / N)')  # not empty list considered true
+                 anw = eval(input( 'TrainData Folder not empty ! Want to overwrite ? (Y / N)'))  # not empty list considered true
                  if anw.lower() != "y":
                      sys.exit()
         else:
@@ -130,18 +140,18 @@ if __name__ == '__main__':
             
         if os.path.isdir(train_label_path):
             if len(glob.glob(train_label_path +"*.xml")) != 0 :
-                 anw = raw_input( 'TrainLabel Folder not empty ! Want to overwrite ? (Y / N)')  # not empty list considered true
+                 anw = eval(input( 'TrainLabel Folder not empty ! Want to overwrite ? (Y / N)'))  # not empty list considered true
                  if anw.lower() != "y":
                      sys.exit()
         else:
             os.makedirs(train_label_path)
     
     if Gen_test_data:
-        print 'Gen_test_data'
+        print('Gen_test_data')
         
         if os.path.isdir(test_data_path):
             if len(glob.glob(test_data_path +"*.jpg")) != 0 :
-                 anw = raw_input( 'TestData Folder not empty ! Want to overwrite ? (Y / N)')  # not empty list considered true
+                 anw = eval(input( 'TestData Folder not empty ! Want to overwrite ? (Y / N)'))  # not empty list considered true
                  if anw.lower() != "y":
                      sys.exit()
         else:
@@ -151,7 +161,7 @@ if __name__ == '__main__':
         
         if os.path.isdir(test_label_path):
             if len(glob.glob(test_label_path +"*.xml")) != 0 :
-                 anw = raw_input( 'TestLabel Folder not empty ! Want to overwrite ? (Y / N)')  # not empty list considered true
+                 anw = eval(input( 'TestLabel Folder not empty ! Want to overwrite ? (Y / N)'))  # not empty list considered true
                  if anw.lower() != "y":
                      sys.exit()
         else:
@@ -159,7 +169,7 @@ if __name__ == '__main__':
     
     '''Check text_path''' 
     if os.path.isdir(text_data_path):
-          anw = raw_input( 'TextData Folder already exist, may overwrite files.[y/n]')
+          anw = input( 'TextData Folder already exist, may overwrite files.[Y/N]')
           if anw.lower() != 'y':
               sys.exit()
     else :
@@ -171,7 +181,7 @@ if __name__ == '__main__':
         os.remove( text_data_path + 'test.txt')
 
     if SingleProcess: 
-        print 'Single Process ...'
+        print('Single Process ...')
         get_sync(SYNC)
         start = time.time()  
         '''Generate training data'''
@@ -184,10 +194,10 @@ if __name__ == '__main__':
             
             GenData_many_targets(test_num, Initial_name_test, test_data_path, test_label_path, text_data_path)
         end = time.time()
-        print 'time : ',end - start
+        print(('time : ',end - start))
 
     if not SingleProcess :
-        print 'Multiprocess...'
+        print('Multiprocess...')
         
         start = time.time()
         job_queue = JoinableQueue()
@@ -217,7 +227,7 @@ if __name__ == '__main__':
         job_queue.join()
         end = time.time()   
 
-        print 'time: ', end-start  
+        print(('time: ', end-start))  
 
 
 

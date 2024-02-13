@@ -14,16 +14,16 @@ step2 = False
 step1 = True
 if step1 : 
     # for phone2016
-    pkl_path = '/home/pohsuan/Documents/Marathon2017/detections/detects-phone2016/'
+    pkl_path = '/home/pohsuanh/Documents/Marathon2017/detections/detects-phone2016/'
     txt_path = pkl_path
     img_path = pkl_path
     dest_path =pkl_path
 elif step2 :   
     # for phon2016step2
-    pkl_path = '/home/pohsuan/Documents/Marathon2017/detections/detects-phone2016-step2/'
-    txt_path = '/home/pohsuan/Documents/Marathon2017/detections/detects-phone2016-step2/'
-    img_path = '/home/pohsuan/Documents/Marathon2017/tag_pics/realpho2016phone/'
-    dest_path = '/home/pohsuan/Documents/Marathon2017/detections/detects-phone2016-step2/' 
+    pkl_path = '/home/pohsuanh/Documents/Marathon2017/detections/detects-phone2016-step2/'
+    txt_path = '/home/pohsuanh/Documents/Marathon2017/detections/detects-phone2016-step2/'
+    img_path = '/home/pohsuanh/Documents/Marathon2017/tag_pics/realpho2016phone/'
+    dest_path = '/home/pohsuanh/Documents/Marathon2017/detections/detects-phone2016-step2/' 
 with open(txt_path +'test.txt') as f:
     data = f.readlines()
 with open(pkl_path + 'detections.pkl', 'rb') as f1:
@@ -44,7 +44,7 @@ images  = sorted(glob.glob( img_path+ "*.jpg" ) )
 
 #%%    
 for i, img in enumerate(images):
-    print('%d/%d'%(i,len(images)))
+    print(('%d/%d'%(i,len(images))))
     imgname=data[i]
     kk=imgname[:imgname.find("\n")]
     jpgname='%s.jpg'%(kk)

@@ -3,7 +3,7 @@
 """
 Created on Tue May 16 18:23:34 2017
 
-@author: pohsuan
+@author: pohsuanh
 """
 
 
@@ -20,7 +20,7 @@ from string import join
 import pickle as pickle
 import time
 
-target_src_path = '/home/pohsuan/Documents/Marathon2017/data/raw_targets/'
+target_src_path = '/home/pohsuanh/Documents/Marathon2017/data/raw_targets/'
 q = glob.glob('./data/raw_targets/raw_targets*.p')
 img, code, font_path, code_x, code_y, CodeWidth_En, CodeHeight_En, CodeWidth_Nb, CodeHeight_Nb = pickle.load( open( np.random.choice(q), "rb" ) )
 img =texture.draw_shade(img, 'heavy_crumple')
@@ -38,11 +38,11 @@ rows, cols = img_alpha.shape
 
 # Search for left
 loc1=()
-x, y = np.meshgrid(range(rows), range(cols))
+x, y = np.meshgrid(list(range(rows)), list(range(cols)))
 for row, col in zip( x.flat , y.flat):
 #    print (row, col)
     if img_alpha[row,col] ==255:
-        print 'find'
+        print('find')
         loc1 = (row, col)
         break
 
@@ -53,7 +53,7 @@ loc2=()
 for row, col in zip( x.T.flat , y.T.flat):
 #    print (row, col)
     if img_alpha[row,col] ==255:
-        print 'find'
+        print('find')
         loc2 = (row, col)
         break 
 
@@ -61,23 +61,23 @@ top = loc2[0]
 
 # search right
 loc1 = ()
-x, y = np.meshgrid(range(rows), range(cols))
+x, y = np.meshgrid(list(range(rows)), list(range(cols)))
 for row, col in zip( np.fliplr([np.asarray(x.flat)])[0] ,
                     np.fliplr([np.asarray(y.flat)])[0]):
 #    print (row, col)
     if img_alpha[row,col] ==255:
-        print 'find'
+        print('find')
         loc1 = (row, col)
         break
 right = loc1[1]
 # search bottom
 loc2 = ()
-x, y = np.meshgrid(range(rows), range(cols))
+x, y = np.meshgrid(list(range(rows)), list(range(cols)))
 for row, col in zip( np.fliplr([np.asarray(x.T.flat)])[0] ,
                     np.fliplr([np.asarray(y.T.flat)])[0]):
 #    print (row, col)
     if img_alpha[row,col] ==255:
-        print 'find'
+        print('find')
         loc2 = (row, col)
         break
     
@@ -85,12 +85,12 @@ bottom =loc2[0]
 
 end = time.time()
 
-print 'self_crop_time, ', end-start
+print(('self_crop_time, ', end-start))
 #%%
 start = time.time()
 box = img_flag.getbbox()
 end =time.time()
-print 'PIL crop time, ', end-start
+print(('PIL crop time, ', end-start))
 img_crop = img_flag.crop(box)
 
 

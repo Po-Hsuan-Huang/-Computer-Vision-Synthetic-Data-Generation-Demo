@@ -3,7 +3,7 @@
 """
 Created on Tue Jun 27 17:52:13 2017
 
-@author: pohsuan
+@author: pohsuanh
 
 Class of all geometrical transform functions
 
@@ -11,8 +11,7 @@ There are four types of transforms : 'rotation', 'flag', 'ripple', 'perspective'
                     
 
 """
-
-from submodules import flag_transform, perspective_transform, rotate_transform, ripple_transform
+from lib.transform.util import flag_transform, perspective_transform, rotate_transform, ripple_transform
 import numpy as np    
 
 '''
@@ -97,7 +96,7 @@ def formbox(pos):
     
 if __name__ == '__main__':  
     from PIL import Image, ImageDraw
-    import cPickle as pickle
+    import pickle as pickle
     import glob
     import matplotlib.pyplot as plt
     

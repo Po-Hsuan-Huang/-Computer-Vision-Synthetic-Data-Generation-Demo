@@ -51,7 +51,6 @@ import glob
 from lib.image import shadeLeaves,texture, HSL 
 from lib.transform import transform
 from Any2VOC_function_many_targets import *
-from string import join
 import pickle as pickle
 import subprocess
 import fnmatch
@@ -129,7 +128,8 @@ def gen_code():
         
     '''produce number code'''
     Nu = np.random.randint(0,9,5)
-    N_code  = join( [str(i) for i in list(Nu)],sep ='')
+    N_code = ''.join([str(i) for i in list(Nu)])
+
     
 #    check_sum = check_sum/11.0+0.09
 #    check_code = int(np.fix( (check_sum - np.fix(check_sum)) * 10 ))
@@ -230,8 +230,8 @@ def draw_lottery( prize, people) :
         pool : a shuffled list of size poeple
     '''
     pool = np.zeros(people, dtype = int)
-    pool[0 : len(prize)] = range(1, len(prize) + 1)
-    idx = range(people)
+    pool[0 : len(prize)] = list(range(1, len(prize) + 1))
+    idx = list(range(people))
     np.random.shuffle(idx)
     pool = pool[idx]
     return pool, idx
@@ -451,7 +451,7 @@ def GenData_many_targets(img_num, initial_name, data_path, label_path, text_path
     DATA_PATH = data_path   # path for JPEGImages
     LABEL_PATH = label_path # path for Annotations
     # path for ImageSet
-    target_src_path = '/home/pohsuan/Documents/Marathon2017/data/raw_targets2/'
+    target_src_path = '/home/pohsuanh/Documents/Marathon2017/data/raw_targets2/'
 
     DATA_PATH = data_path
     LABEL_PATH = label_path
@@ -468,16 +468,16 @@ def GenData_many_targets(img_num, initial_name, data_path, label_path, text_path
     # path to the remote folder for synchronizing
     
 #    os.remove('/home/acer/Documents/Marathon/' + 'sync.sh')
-    sync_data_dst = '/home/pohsuan.huang/pva-faster-rcnn/data/VOCdevkit2007/sycfolder/JPEGImages' 
-    sync_label_dst ='/home/pohsuan.huang/pva-faster-rcnn/data/VOCdevkit2007/sycfolder/Annotations'
-    with open( '/home/pohsuan/Documents/Marathon2017/' + 'sync.sh',"w") as fo:
+    sync_data_dst = '/home/pohsuanh.huang/pva-faster-rcnn/data/VOCdevkit2007/sycfolder/JPEGImages' 
+    sync_label_dst ='/home/pohsuanh.huang/pva-faster-rcnn/data/VOCdevkit2007/sycfolder/Annotations'
+    with open( '/home/pohsuanh/Documents/Marathon/' + 'sync.sh',"w") as fo:
         
         fo.writelines(['#!/bin/sh\n', 
                        '# open -u <user> <password> <host url>; mirror -c -R -L <path from> <path to>\n',
-                       'lftp -c "open -u pohsuan.huang,acer 10.36.169.170; mirror -c -R -L '
+                       'lftp -c "open -u pohsuanh.huang,acer 10.36.169.170; mirror -c -R -L '
                        + data_path + ' ' + sync_data_dst + '"\n','\n'
                       ])
-        fo.writelines(['lftp -c "open -u pohsuan.huang,acer 10.36.169.170; mirror -c -R -L '
+        fo.writelines(['lftp -c "open -u pohsuanh.huang,acer 10.36.169.170; mirror -c -R -L '
                        + label_path + ' ' + sync_label_dst + '"\n'])
     
     os.chmod('sync.sh', 0o775)            
@@ -537,14 +537,14 @@ def GenData_many_targets(img_num, initial_name, data_path, label_path, text_path
                     break
                 except (SyntaxError, IOError):
                      # You can always log it to logger
-                    print bg_list[bg_no], ' is bigger than MaxBlock. Retry...'
+                    print((bg_list[bg_no], ' is bigger than MaxBlock. Retry...'))
             
             pastePos_list, newPos_list, img_list, bg = paste_target_on_background(img_list, bg, newPos_list, num_grid)
             create_xml(pastePos_list, img_list, newPos_list, font_path_list, bg, code_list, filename)
             # folder sync fromo local to remote 
             if SYNC:
                 if code_no % SyncBatchSize == 0 and SyncBatchSize != 0:
-                    subprocess.call('/home/pohsuan/Documents/Marathon2017/' + 'sync.sh')
+                    subprocess.call('/home/pohsuanh/Documents/Marathon2017/' + 'sync.sh')
                     
 
 
@@ -555,14 +555,14 @@ if __name__ == '__main__':
     img_num = 10
     initial_name = 10    
 # trian annotation data path
-    label_path = '/home/pohsuan/disk1/Marathon/Annotations/test/' 
+    label_path = '/home/pohsuanh/disk1/Marathon/Annotations/test/' 
 # train_data_output_path
-    data_path = '/home/pohsuan/disk1/Marathon/JPEGImages/test/'
+    data_path = '/home/pohsuanh/disk1/Marathon/JPEGImages/test/'
 # train_data_output_path
-    txt_path = '/home/pohsuan/disk1/Marathon/ImageSets/Main/' 
-    start = time.clock()
+    txt_path = '/home/pohsuanh/disk1/Marathon/ImageSets/Main/' 
+    start = time.perf_counter()
     GenData_many_targets(img_num, initial_name, data_path, label_path, txt_path)
-    end = time.clock()
+    end = time.perf_counter()
     
-    print format('runtime : %.50f' % end-start)
+    print((format('runtime : %.50f' % end-start)))
 

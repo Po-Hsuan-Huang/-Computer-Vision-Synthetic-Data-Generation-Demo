@@ -3,7 +3,7 @@
 """
 Created on Wed Jun 28 17:29:02 2017
 
-@author: pohsuan
+@author: pohsuanhhh
 
 
 
@@ -31,7 +31,7 @@ import glob
 import os
 import numpy as np
 
-import cPickle as pickle
+import pickle as pickle
 
 
     
@@ -124,12 +124,12 @@ def namer(path, i ,src, dst):
     
 if __name__ == '__main__':
     GT = False
-    src = '/home/pohsuan/Documents/Marathon2017/detections/detects-phone2016/'
-    dst_folder = '/home/pohsuan/Documents/Marathon2017/tag_pics/realpho2016phone/'
+    src = '/home/pohsuanhh/Documents/Marathon2017/detections/detects-phone2016/'
+    dst_folder = '/home/pohsuanhh/Documents/Marathon2017/tag_pics/realpho2016phone/'
 
     src_annot = ''
     src_img =  ''    
-#    src = '/home/pohsuan/Documents/Marathon2017/data/'
+#    src = '/home/pohsuanhhh/Documents/Marathon2017/data/'
 #    src_annot = 'Annotations/TrainSet7/50k/'
 #    src_img =  'JPEGImages/TrainSet7/50k/'
 

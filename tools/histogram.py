@@ -13,10 +13,10 @@ import xml.etree.ElementTree as ET
 import numpy as np
 import fnmatch
 import os
-xml_list = sorted(glob.glob('/home/pohsuan/Documents/Marathon2017/data/Annotations/TrainSet2/*.xml'))
+xml_list = sorted(glob.glob('/home/pohsuanh/Documents/Marathon2017/data/Annotations/TrainSet2/*.xml'))
 
 xml_list = []
-src = '/home/pohsuan/Documents/Marathon2017/data/Annotations/TrainSet3/'
+src = '/home/pohsuanh/Documents/Marathon2017/data/Annotations/TrainSet3/'
 
 for root, dirnames, filenames in os.walk(src):
     for filename in fnmatch.filter(filenames, '*.xml'):
@@ -41,7 +41,7 @@ for n, filename in enumerate(xml_list):
             index = categories[cat.text]
             hist[index] += 1
     except:
-        print filename
+        print(filename)
         pass
 
             

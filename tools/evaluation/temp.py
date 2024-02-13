@@ -4,7 +4,7 @@ Spyder Editor
 
 This is a temporary script file.
 """
-import cPickle, os
+import pickle, os
 from voc_eval import voc_eval, parse_rec
 import numpy as np
 import matplotlib.pyplot as plt
@@ -34,7 +34,7 @@ def do_python_eval( ovthresh=0.5, output_dir = 'output'):
         rec, prec, ap, count = voc_eval(
             filename, annopath, imagesetfile, cls, cachedir, ovthresh=0.5)
         aps += [ap]
-        print('detectoin count for {} = {:.4f}'.format(cls, int(count)))
+        print(('detectoin count for {} = {:.4f}'.format(cls, int(count))))
         dic_pred.append(int(count))
 #        with open(os.path.join(output_dir, cls + '_pr.pkl'), 'w') as f:
 #            cPickle.dump({'rec': rec, 'prec': prec, 'ap': ap}, f)

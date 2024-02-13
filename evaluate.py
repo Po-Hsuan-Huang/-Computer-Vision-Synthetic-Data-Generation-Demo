@@ -90,7 +90,7 @@ def draw_check_code(im, cls, boxes):
 
 
 def catch_check_code(net, im, image_name):
-    CLASSES = map(lambda s: 'check-' + str(s) , range(10))
+    CLASSES = ['check-' + str(s) for s in range(10)]
     CLASSES.insert(0, '__background__')
     check_code = image_name.split('_')[-1][0]
     im = im[:, :, (2, 1, 0)]
@@ -117,12 +117,12 @@ def catch_check_code(net, im, image_name):
 def find_content(net, im, image_name):
     """Detect the content inside each container number"""
 
-    CLASSES = map(str, range(10)) + [u for u in string.lowercase]
+    CLASSES = list(map(str, list(range(10)))) + [u for u in string.lowercase]
     CLASSES.insert(0, '__background__')
     CLASSES.insert(1, 'check')
 
     correct_number = image_name[0:10].lower()
-    print 'The correct number is %s' %(correct_number)
+    print(('The correct number is %s' %(correct_number)))
 
     correct_number = [c for c in correct_number]
 
@@ -151,7 +151,7 @@ def find_content(net, im, image_name):
 
 
     bbs = []
-    for key, values in all_bb.iteritems():
+    for key, values in list(all_bb.items()):
         for value in values:
             if key == 'check':
                 key = '@'
@@ -233,8 +233,8 @@ def find_content(net, im, image_name):
 
     match_count = 0
 
-    print 'what we see : %s' %(choose)
-    print 'correct number : %s' %(correct_number)
+    print(('what we see : %s' %(choose)))
+    print(('correct number : %s' %(correct_number)))
 
     for c in choose:
         try:
@@ -243,11 +243,11 @@ def find_content(net, im, image_name):
             del correct_number[index]
             match_count = match_count + 1
         except ValueError:
-            print 'error in check %s' %(c)
+            print(('error in check %s' %(c)))
             #  continue
 
-    print 'choose :%s' %(choose)
-    print 'max_count : %d' %(match_count)
+    print(('choose :%s' %(choose)))
+    print(('max_count : %d' %(match_count)))
 
     if match_count == 10:
         perfect.append(image_name)
@@ -273,7 +273,7 @@ def almost_overlap(rect1, rect2):
 def find_container_number(net, image_name):
     """find container number."""
 
-    CLASSES = map(str, range(10)) + sorted([u.lower() for u in ['C', 'E', 'D', 'G', 'F', 'I', 'H', 'K', 'M', 'L', 'N', 'P', 'S', 'R', 'U', 'T', 'W', 'Y']])
+    CLASSES = list(map(str, list(range(10)))) + sorted([u.lower() for u in ['C', 'E', 'D', 'G', 'F', 'I', 'H', 'K', 'M', 'L', 'N', 'P', 'S', 'R', 'U', 'T', 'W', 'Y']])
     CLASSES.insert(0, '__background__')
     CLASSES.insert(1, 'check')
     CLASSES.insert(2, 'number')
@@ -316,7 +316,7 @@ def find_container_number(net, image_name):
     for number in numbers:
         i = i + 1
         yyy = []
-        for key, all_value in all_bb.iteritems():
+        for key, all_value in list(all_bb.items()):
             for value in all_value:
                 if key != 'number':
                     if key == 'check':
@@ -442,7 +442,7 @@ if __name__ == '__main__':
     check_code_net = net('faster_rcnn_test3.pt', '0.2M_with_checkcode_10_class.caffemodel')
 
 
-    im_names = map(lambda b: b.split('/')[-1], glob.glob('data/%s/*' %(dataset)))
+    im_names = [b.split('/')[-1] for b in glob.glob('data/%s/*' %(dataset))]
 
     all_count = 0
 
@@ -453,8 +453,8 @@ if __name__ == '__main__':
     check_count = 0
     correc_all_count = 0
     for im_name in im_names:
-        print '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
-        print 'Demo for data/demo/{}'.format(im_name)
+        print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
+        print(('Demo for data/demo/{}'.format(im_name)))
         crops = find_container_number(number_net, im_name)
         # we may find a lot of candidate numbers
         # in order to retrive the 'only one' container number,
@@ -477,7 +477,7 @@ if __name__ == '__main__':
                 all_bb = catch_check_code(check_code_net, mycrop, im_name)
                 all_check_code = []
                 check_bbxes = []
-                for key, value in all_bb.iteritems():
+                for key, value in list(all_bb.items()):
                     for bb in value:
                         check_bbxes.append((key.split('-')[-1],) + bb)
                 detect_checkcode = None
@@ -519,25 +519,25 @@ if __name__ == '__main__':
 
 
 
-    print all_count
-    print float(all_count) / (len(im_names) * 10)
+    print(all_count)
+    print((float(all_count) / (len(im_names) * 10)))
 
-    print 'check code precision %f' %(float(check_count)/len(im_names))
+    print(('check code precision %f' %(float(check_count)/len(im_names))))
 
     import shutil
 
     for im in miss:
         shutil.copy('data/%s/%s' %(dataset, im), 'data/miss/%s' %(im))
 
-    for key in ooo.iterkeys():
+    for key in list(ooo.keys()):
         os.mkdir('data/demo_results3/%s' %(str(key)))
 
-    for key in ppp.iterkeys():
+    for key in list(ppp.keys()):
         os.mkdir('data/demo_results4/%s' %(str(key)))
 
 
     all_ims = 0
-    for key, value in ooo.iteritems():
+    for key, value in list(ooo.items()):
         all_ims = all_ims + len(value)
 
 
@@ -546,22 +546,22 @@ if __name__ == '__main__':
     assert all_ims == len(im_names), '%d != %d' %(all_ims, len(im_names))
 
 
-    for key, value in ooo.iteritems():
+    for key, value in list(ooo.items()):
         os.mkdir('data/demo_results3/%d/org' %(key))
         for v in value:
             shutil.copy('data/demo_results2/' + v, os.path.join('data', 'demo_results3', str(key), v))
             shutil.copy('data/%s/' %(dataset) + v, os.path.join('data', 'demo_results3', str(key), 'org', v))
-        print key, len(value)
+        print((key, len(value)))
         ratio = float(len(value))/len(im_names) * 100
-        print '%s:%s%%' %(key, str(ratio))
+        print(('%s:%s%%' %(key, str(ratio))))
 
-    print '--------------------Add check code-----------------------------------------'
+    print('--------------------Add check code-----------------------------------------')
 
-    for key, value in ppp.iteritems():
+    for key, value in list(ppp.items()):
         os.mkdir('data/demo_results4/%d/org' %(key))
         for v in value:
             shutil.copy('data/demo_results2_with_checkcode/' + v, os.path.join('data', 'demo_results4', str(key), v))
             shutil.copy('data/%s/' %(dataset) + v, os.path.join('data', 'demo_results4', str(key), 'org', v))
-        print key, len(value)
+        print((key, len(value)))
         ratio = float(len(value))/len(im_names) * 100
-        print '%s:%s%%' %(key, str(ratio))
+        print(('%s:%s%%' %(key, str(ratio))))

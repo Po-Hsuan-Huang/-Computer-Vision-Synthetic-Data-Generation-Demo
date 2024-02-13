@@ -31,11 +31,11 @@ def draw_shade(img, mode):
         m = np.random.sample(4) * 0.6 *img_size_w
         n = np.random.sample(4) * 0.6 *img_size_h
         # vertices on top and botton sides
-        M = zip( [ m[0], img_size_w -m[1], img_size_w - m[2], m[3]  ],
-                [ 0, 0, img_size_h, img_size_h] )
+        M = list(zip( [ m[0], img_size_w -m[1], img_size_w - m[2], m[3]  ],
+                [ 0, 0, img_size_h, img_size_h] ))
        # vertices on left and right sides
-        N = zip([0, img_size_w, img_size_w, 0], 
-                [n[0], n[1], img_size_h - n[2], img_size_h - n[3]])
+        N = list(zip([0, img_size_w, img_size_w, 0], 
+                [n[0], n[1], img_size_h - n[2], img_size_h - n[3]]))
     
         shadeColor = (0,0,0,256)
     
@@ -61,8 +61,8 @@ def draw_shade(img, mode):
         piece3 = apply_black_gradient(piece3,3,0.7)
         piece4 = apply_black_gradient(piece4,1,0.6)
         
-        print shade.mode, shade.size
-        print piece1.mode, piece1.size
+        print((shade.mode, shade.size))
+        print((piece1.mode, piece1.size))
         
         
         shade = Image.alpha_composite( shade, piece1)
@@ -75,7 +75,7 @@ def draw_shade(img, mode):
     if mode =='triangle':
         V = [(0,0),(img_size_w, 0),(img_size_w,img_size_h),(0,img_size_h)]
        
-        s0,s1,s2 = np.random.choice(range(12),3)
+        s0,s1,s2 = np.random.choice(list(range(12)),3)
         # flatten the lists of all vertices of triangles, and randomly choose 3
         T = V+M+N
         

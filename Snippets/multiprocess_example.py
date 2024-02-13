@@ -3,7 +3,7 @@
 """
 Created on Wed May 17 13:34:42 2017
 
-@author: pohsuan
+@author: pohsuanh
 """
 #%%
 
@@ -26,12 +26,12 @@ class Worker(MP):
               job=self.queue.get()
             
               if not job:
-                  print 'Exiting...', self.name
-                  print 'Job, ', job
+                  print(('Exiting...', self.name))
+                  print(('Job, ', job))
                   self.queue.task_done()
                   break
               else :
-                  print 'working... ',self.name, job
+                  print(('working... ',self.name, job))
                   time.sleep(0.08)
                   self.queue.task_done()              
           
@@ -56,5 +56,5 @@ if __name__ == '__main__':
     q.join()
     
     
-    print 'finished.'
+    print('finished.')
         

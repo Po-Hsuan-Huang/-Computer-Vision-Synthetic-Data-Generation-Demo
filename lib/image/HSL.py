@@ -3,7 +3,7 @@
 """
 Created on Tue May 23 11:45:32 2017
 
-@author: pohsuan
+@author: pohsuanh
 
 Draw Hue, Saturation, and Intensity
 """
@@ -85,7 +85,7 @@ def Contrast(img) :
   
 
 if __name__ == '__main__':
-    img = Image.open('/home/pohsuan/Documents/Marathon2017/templates/03.png')
+    img = Image.open('/home/pohsuanh/Documents/Marathon2017/templates/03.png')
     hsv2 = img.copy()
 #    hsv2 = Hue(hsv2)
 #    hsv2 = Brightness(hsv2)
