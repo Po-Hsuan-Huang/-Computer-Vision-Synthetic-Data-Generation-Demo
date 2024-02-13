@@ -9,7 +9,7 @@ Edited and annotated on Wedd Mar 15 2017
 
 Wan_Jin_Shi Marathon tag, code recognition project. 
 
-All rights reserved by Acer.Inc
+All rights reserved by lab.Inc
 
 by Po-Hsuan Huang
 
@@ -467,17 +467,17 @@ def GenData_many_targets(img_num, initial_name, data_path, label_path, text_path
 
     # path to the remote folder for synchronizing
     
-#    os.remove('/home/acer/Documents/Marathon/' + 'sync.sh')
+#    os.remove('/home/lab/Documents/Marathon/' + 'sync.sh')
     sync_data_dst = '/home/pohsuanh.huang/pva-faster-rcnn/data/VOCdevkit2007/sycfolder/JPEGImages' 
     sync_label_dst ='/home/pohsuanh.huang/pva-faster-rcnn/data/VOCdevkit2007/sycfolder/Annotations'
     with open( '/home/pohsuanh/Documents/Marathon/' + 'sync.sh',"w") as fo:
         
         fo.writelines(['#!/bin/sh\n', 
                        '# open -u <user> <password> <host url>; mirror -c -R -L <path from> <path to>\n',
-                       'lftp -c "open -u pohsuanh.huang,acer 10.36.169.170; mirror -c -R -L '
+                       'lftp -c "open -u pohsuanh.huang,lab 10.36.169.170; mirror -c -R -L '
                        + data_path + ' ' + sync_data_dst + '"\n','\n'
                       ])
-        fo.writelines(['lftp -c "open -u pohsuanh.huang,acer 10.36.169.170; mirror -c -R -L '
+        fo.writelines(['lftp -c "open -u pohsuanh.huang,lab 10.36.169.170; mirror -c -R -L '
                        + label_path + ' ' + sync_label_dst + '"\n'])
     
     os.chmod('sync.sh', 0o775)            

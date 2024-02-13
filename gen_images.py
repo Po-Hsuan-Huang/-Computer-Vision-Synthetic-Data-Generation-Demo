@@ -11,7 +11,7 @@ Edited and annotated on Wedd Mar 15 2017
 
 Wan_Jin_Shi Marathon tag, code recognition project. 
 
-All rights reserved by Acer.Inc
+All rights reserved by lab.Inc
 
 by Po-Hsuan Huang
 

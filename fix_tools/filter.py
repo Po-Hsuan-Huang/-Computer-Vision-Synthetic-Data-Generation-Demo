@@ -23,12 +23,12 @@ folder = 'TrainSet7'
 
 '''code'''
 #%%
-os.chdir('/home/acer/Documents/Marathon/data/Annotations/' + folder)
+os.chdir('/home/lab/Documents/Marathon/data/Annotations/' + folder)
 n=len(glob.glob(os.getcwd()+"/*.xml"))
 n2=0
 n3=0
 
-f = open('/home/acer/Documents/Marathon/data/ImageSets/broken.txt', 'w')
+f = open('/home/lab/Documents/Marathon/data/ImageSets/broken.txt', 'w')
 
 for str2 in sorted(glob.glob(os.getcwd()+"/*.xml")):
     nnn=0

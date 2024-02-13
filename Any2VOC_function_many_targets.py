@@ -144,12 +144,12 @@ def VOCxml(filename, image_obj, classlabel_list, img_pos_list, text_pos_list, te
     node1 = ET.SubElement(root, "source")
     ET.SubElement(node1, "database").text = "The WJS Database"
     ET.SubElement(node1, "annotation").text = "PASCAL VOC2007"
-    ET.SubElement(node1, "image").text = "Acer"
+    ET.SubElement(node1, "image").text = "lab"
     ET.SubElement(node1, "flickrid").text = "no"
     ET.SubElement(node1, "font_type").text = font_type
     
     node2 = ET.SubElement(root, "owner")
-    ET.SubElement(node2, "flickrid").text = "Acer"
+    ET.SubElement(node2, "flickrid").text = "lab"
     ET.SubElement(node2, "name").text = "KR7800"
 
     # size of the screen

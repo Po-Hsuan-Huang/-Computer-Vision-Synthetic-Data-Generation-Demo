@@ -3,7 +3,7 @@
 """
 Created on Wed Apr 19 17:46:51 2017
 
-@author: acer
+@author: lab
 
 
 Generate raw target images and pickle them in format {raw_target_%f}.p.

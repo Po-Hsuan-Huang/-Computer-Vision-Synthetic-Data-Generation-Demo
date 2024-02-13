@@ -3,7 +3,7 @@
 """
 Created on Wed Apr 26 15:17:49 2017
 
-@author: Po-Hsuan @Acer nc.
+@author: Po-Hsuan @lab nc.
 
 This file collects collects the gaps between sequencial filenames and fill the gaps with file from
 other folders.

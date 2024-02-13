@@ -63,10 +63,10 @@ print(('file not empty ', len(files)))
 list_ecpt = []
 list_valid = []
 
-with open('/home/acer/Documents/Marathon/data/ImageSets/broken.txt', 'r') as f :
+with open('/home/lab/Documents/Marathon/data/ImageSets/broken.txt', 'r') as f :
     exceptions = list(f)
 #%%   
-data_path = '/home/acer/Documents/Marathon/data/ImageSets/Main/'+ str(folder) + '/'
+data_path = '/home/lab/Documents/Marathon/data/ImageSets/Main/'+ str(folder) + '/'
 if os.path.isdir(data_path):
     if len(glob.glob(data_path +"*.txt")) != 0 :
          anw = eval(input( ' Folder not empty ! Want to overwrite ? (Y / N)'))  # not empty list considered true
@@ -100,7 +100,7 @@ with open(data_path + dest, 'w') as g:
     else:
         for x in files:
             x = x.split('.jpg')[0]
-            x = x.split('/home/acer/Documents/Marathon/data/JPEGImages/TrainSet'+str(folder))[1]
+            x = x.split('/home/lab/Documents/Marathon/data/JPEGImages/TrainSet'+str(folder))[1]
 
             x = int(x)
             if list_ecpt:

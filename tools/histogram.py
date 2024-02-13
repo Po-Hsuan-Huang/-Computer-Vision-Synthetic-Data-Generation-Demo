@@ -3,7 +3,7 @@
 """
 Created on Mon May 22 09:14:38 2017
 
-@author: acer
+@author: lab
 
 This file check the distribution of categories of data by ploting a bargraph.
 """

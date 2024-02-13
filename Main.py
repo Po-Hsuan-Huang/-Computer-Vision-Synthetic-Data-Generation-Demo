@@ -85,15 +85,15 @@ if __name__ == '__main__':
     ''' The folders must be created beforehand, remember not to overwrite'''
     
     # trian annotation data path
-    train_label_path = '/home/acer/Documents/Marathon/data/Annotations/TrainSet8/' 
+    train_label_path = '/home/lab/Documents/Marathon/data/Annotations/TrainSet8/' 
     # test annotation data path
-    test_label_path = '/home/acer/Documents/Marathon/data/Annotations/TestSet8/' 
+    test_label_path = '/home/lab/Documents/Marathon/data/Annotations/TestSet8/' 
     # train_data_output_path
-    train_data_path = '/home/acer/Documents/Marathon/data/JPEGImages/TrainSet8/'
+    train_data_path = '/home/lab/Documents/Marathon/data/JPEGImages/TrainSet8/'
     # test_data_output_path
-    test_data_path =  '/home/acer/Documents/Marathon/data/JPEGImages/TestSet8/'
+    test_data_path =  '/home/lab/Documents/Marathon/data/JPEGImages/TestSet8/'
     # index file tracking whom should be trained and whom should be tested
-    text_data_path = '/home/acer/Documents/Marathon/data/ImageSets/Main/8/' 
+    text_data_path = '/home/lab/Documents/Marathon/data/ImageSets/Main/8/' 
 
     
     ''' Check if the folders exist && empty. If not, create a new folder.'''
