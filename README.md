@@ -1,6 +1,6 @@
 # Vanilla Image Generating Toolkit.
 
-### The toolkit allows you to generate image data and annotations(bounding boxes) necessary for number detection on tags of various texture, shade, and geometry. For example, you can generate car plates, marathon tag cloth on simulated environment.The data then can be trimemd to comply with the format of https://github.com/sanghoon/pva-faster-rcnn to train pva-net-faster-rcnn model.  
+### The toolkit allows you to generate image data and annotations(bounding boxes) necessary for number detection for tags of various textures, shades, and geometry. For example, you can generate car plates, marathon tag cloth in simulated environment.The data then can be trimmed to comply with the format of https://github.com/sanghoon/pva-faster-rcnn to train pva-net-faster-rcnn model.  
 
 ## Noticable updates in this release :
    Release 3.0 
