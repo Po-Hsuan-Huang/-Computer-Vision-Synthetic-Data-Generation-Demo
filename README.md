@@ -2,8 +2,11 @@
 
 ![Tool Overview](demo_imgs/tool_overview.png)
 
+*Data Augmentation with Imaging processing and 3D geometrical transformation*
+
 ![Tool Overview](demo_imgs/training_diagram.png)
 
+*Training protocols with generated augmented images to enhance model performance*
 ## Description 
 The toolkit allows you to generate image data and annotations(bounding boxes) necessary for number detection for tags of various textures, colors, and geometry. For example, you can generate car plates, marathon tag cloths in simulated environments.The data then can be cropped to comply with the data format of PASCAL Object Dectection Competition (http://host.robots.ox.ac.uk/pascal/VOC/). You can use this toolkit to generate millions of photos for model fine-tuning. 
 
