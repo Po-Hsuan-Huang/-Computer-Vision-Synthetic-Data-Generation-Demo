@@ -12,7 +12,7 @@ import os, glob
 
 #%%
 
-os.chdir('/home/pohsuanh/disk1/Marathon/testImages/')
+os.chdir(os.path.join(os.path.getcwd(),'/testImages/')
 print((os.getcwd()))
 files = glob.glob(os.getcwd()+"/*.jpg")
 print  (files)

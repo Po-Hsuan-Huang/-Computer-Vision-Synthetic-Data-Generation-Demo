@@ -67,7 +67,7 @@ def apply_black_gradient(input_im,
     output_im = Image.alpha_composite(input_im, black_im)
 
     return output_im
-d
+
 
 
 
@@ -112,9 +112,9 @@ if __name__ == '__main__':
     
     # paste template at the center of the screen
     
-    screen.paste(temp,( screen_w/2 - temp_w/2, screen_h/2 - temp_h/2))
-    alpha = mask.split[-1]
-    mask = mask.putalpha(alpha)
+    screen.paste(temp, ( int(screen_w/2 - temp_w/2), int(screen_h/2 - temp_h/2)))
+    r,g,b,alpha = mask.split()
+    mask.putalpha(alpha)
     print((screen.mode, mask.mode))
     screen = Image.alpha_composite(screen, mask)
     

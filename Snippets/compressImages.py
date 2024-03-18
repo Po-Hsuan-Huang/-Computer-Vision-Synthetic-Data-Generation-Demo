@@ -12,8 +12,8 @@ from skimage import util, img_as_float, io
 import glob
 import cv2
 
-img_dst_path = '/home/pohsuanh/disk1/Marathon/JPEGImages/TrainSet6/uplaoddir/'
-imgList = sorted(glob.glob('/home/pohsuanh/disk1/Marathon/JPEGImages/TrainSet5/uplaoddir/*jpg'))
+img_dst_path = os.path.join(os.path.getcwd(),'/JPEGImages/TrainSet6/uplaoddir/'
+imgList = sorted(glob.glob(os.path.join(os.path.getcwd(),'/JPEGImages/TrainSet5/uplaoddir/*jpg'))
 #imgList = (glob.glob('/home/pohsuanh/Documents/Marathon2017/*jpg'))
 
 for i, src_path in enumerate(imgList):

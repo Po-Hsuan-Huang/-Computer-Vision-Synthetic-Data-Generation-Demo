@@ -319,15 +319,15 @@ def gen_img(filename, font_list, bg_list):
     mean = np.random.uniform(0, 0.003)
     var = np.random.uniform(0.00001, 0.0005)
     bg = util.random_noise(bg, mode='gaussian', mean=mean, var=var)
-    io.imsave('./JPEGImages/'+ filename +'.jpg', bg,  quality=90)
+    io.imsave(os.path.join(os.getcwd(),'Marathon2017/JPEGImages/'+ filename +'.jpg'), bg,  quality=90)
 #--------------------------------------------------------------------------
 
 
 def give_me_SCC_images(img_num):
     
-    font_list = glob.glob('./font/*.*')
+    font_list = glob.glob(os.path.join(os.getcwd(),'font/*.*'))
 #    bg_list = glob.glob('./background/bg_train_sets/*.jpg')
-    bg_list = glob.glob('./background/bg_train_people/*.jpg')
+    bg_list = glob.glob(os.path.join(os.getcwd(),'Marathon2017/background/*.jpg'))
     bg_list = bg_list
     if os.path.isfile('./trainval.txt'):
         os.remove("./trainval.txt")

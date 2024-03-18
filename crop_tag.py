@@ -124,14 +124,11 @@ def namer(path, i ,src, dst):
     
 if __name__ == '__main__':
     GT = False
-    src = '/home/pohsuanhh/Documents/Marathon2017/detections/detects-phone2016/'
-    dst_folder = '/home/pohsuanhh/Documents/Marathon2017/tag_pics/realpho2016phone/'
+    src = os.path.join(os.getcwd(),'Marathon2017/detections/detects-phone2016/')
+    dst_folder = os.path.join(os.getcwd(),'Marathon2017/tag_pics/realpho2016phone/')
 
-    src_annot = ''
-    src_img =  ''    
-#    src = '/home/pohsuanhhh/Documents/Marathon2017/data/'
-#    src_annot = 'Annotations/TrainSet7/50k/'
-#    src_img =  'JPEGImages/TrainSet7/50k/'
+    src_annot = 'Annotations'
+    src_img =  'Images'    
 
 #%% Crop images with ground truth xml files 
     if GT :

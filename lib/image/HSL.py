@@ -7,6 +7,7 @@ Created on Tue May 23 11:45:32 2017
 
 Draw Hue, Saturation, and Intensity
 """
+import os
 import  cv2
 import numpy as np
 import matplotlib.pyplot as plt
@@ -85,11 +86,12 @@ def Contrast(img) :
   
 
 if __name__ == '__main__':
-    img = Image.open('/home/pohsuanh/Documents/Marathon2017/templates/03.png')
+    img = Image.open(os.path.join(os.getcwd(),'templates/04.png'))
     hsv2 = img.copy()
-#    hsv2 = Hue(hsv2)
-#    hsv2 = Brightness(hsv2)
-#    hsv2 = Contrast(hsv2)
+    hsv2 = Hue(hsv2)
+    hsv2 = Brightness(hsv2)
+    hsv2 = Contrast(hsv2)
     hsv2 = Sharpness(hsv2)
     plt.figure(figsize=(10,10))
     plt.imshow(hsv2)
+    plt.show()

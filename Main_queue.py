@@ -26,7 +26,7 @@ images and labels can be inspected with GUI labelImage.py
 https://github.com/tzutalin/labelImg
 
 Specify the folders where you wish to store the data.
-If not exist yet, the program create a new folder for you.c
+If not exist yet, the program create a new folder for you.
 
 Specify the size of training set and test set, and the naming follows the 
 order that can be used by pva-fast-rcnn.
@@ -79,6 +79,7 @@ if __name__ == '__main__':
 
     os.chdir(os.path.dirname(os.path.realpath(__file__)))
 
+    cwd = os.getcwd()
 
     global start
     
@@ -89,7 +90,7 @@ if __name__ == '__main__':
     SYNC = False
     # number of training data 
     
-    train_num = 50000
+    train_num = 5
     
     # number of testing data
     
@@ -114,17 +115,16 @@ if __name__ == '__main__':
     ''' The folders must be created beforehand, remember not to overwrite'''
     
     # trian annotation data path
-    train_label_path = '/home/pohsuanh/disk1/Marathon/Annotations/TrainSet8/' 
+    train_label_path = os.path.join( cwd, 'Marathon2017/Annotations/TrainSet2/')
     # test annotation data path
-    test_label_path = '/home/pohsuanh/disk1/Marathon/Annotations/TestSet8/' 
+    test_label_path = os.path.join(cwd,'Marathon2017/Annotations/TestSet2/') 
     # train_data_output_path
-    train_data_path = '/home/pohsuanh/disk1/Marathon/JPEGImages/TrainSet8/'
+    train_data_path = os.path.join(cwd,'Marathon2017/JPEGImages/TrainSet2/')
     # test_data_output_path
-    test_data_path =  '/home/pohsuanh/disk1/Marathon/JPEGImages/TestSet8/'
+    test_data_path =  os.path.join(cwd,'Marathon2017/JPEGImages/TestSet2/')
     
     # index file tracking whom should be trained and whom should be tested
-    text_data_path = '/home/pohsuanh/disk1/Marathon/ImageSets/Main/8/' 
-
+    text_data_path = os.path.join(cwd, 'Marathon2017/ImageSets/Main/2/') 
     
     ''' Check if the folders exist && empty. If not, create a new folder.'''
     if Gen_train_data :
@@ -132,7 +132,7 @@ if __name__ == '__main__':
     
         if os.path.isdir(train_data_path):
             if len(glob.glob(train_data_path +"*.jpg")) != 0 :
-                 anw = eval(input( 'TrainData Folder not empty ! Want to overwrite ? (Y / N)'))  # not empty list considered true
+                 anw = input( 'TrainData Folder not empty ! Want to overwrite ? (Y / N)')  # not empty list considered true
                  if anw.lower() != "y":
                      sys.exit()
         else:
@@ -140,7 +140,7 @@ if __name__ == '__main__':
             
         if os.path.isdir(train_label_path):
             if len(glob.glob(train_label_path +"*.xml")) != 0 :
-                 anw = eval(input( 'TrainLabel Folder not empty ! Want to overwrite ? (Y / N)'))  # not empty list considered true
+                 anw = input( 'TrainLabel Folder not empty ! Want to overwrite ? (Y / N)')  # not empty list considered true
                  if anw.lower() != "y":
                      sys.exit()
         else:
@@ -151,7 +151,7 @@ if __name__ == '__main__':
         
         if os.path.isdir(test_data_path):
             if len(glob.glob(test_data_path +"*.jpg")) != 0 :
-                 anw = eval(input( 'TestData Folder not empty ! Want to overwrite ? (Y / N)'))  # not empty list considered true
+                 anw = input( 'TestData Folder not empty ! Want to overwrite ? (Y / N)')  # not empty list considered true
                  if anw.lower() != "y":
                      sys.exit()
         else:
@@ -161,7 +161,7 @@ if __name__ == '__main__':
         
         if os.path.isdir(test_label_path):
             if len(glob.glob(test_label_path +"*.xml")) != 0 :
-                 anw = eval(input( 'TestLabel Folder not empty ! Want to overwrite ? (Y / N)'))  # not empty list considered true
+                 anw =input( 'TestLabel Folder not empty ! Want to overwrite ? (Y / N)')  # not empty list considered true
                  if anw.lower() != "y":
                      sys.exit()
         else:
@@ -169,7 +169,7 @@ if __name__ == '__main__':
     
     '''Check text_path''' 
     if os.path.isdir(text_data_path):
-          anw = input( 'TextData Folder already exist, may overwrite files.[Y/N]')
+          anw = input( 'TextData Folder already exist, may overwrite files.( Y / N)')
           if anw.lower() != 'y':
               sys.exit()
     else :
@@ -227,7 +227,7 @@ if __name__ == '__main__':
         job_queue.join()
         end = time.time()   
 
-        print(('time: ', end-start))  
+        print('time: ', end-start)  
 
 
 

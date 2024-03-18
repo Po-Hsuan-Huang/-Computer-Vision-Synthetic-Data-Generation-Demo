@@ -12,7 +12,7 @@ Created on Tue Jun 27 16:46:05 2017
 Created on Mon Mar 13 15:38:37 2017
 
 """
-
+import os
 from PIL import Image, ImageDraw
 import numpy as np
 import matplotlib.pyplot as plt
@@ -88,14 +88,14 @@ def img_transform(image):
     out_cols = cols
     out = warp(image, tform, output_shape=(out_rows , out_cols))
     
-#    plt.figure()
-#    dst_rows, dst_cols = tform.inverse(src)[:, 0], tform.inverse(src)[:, 1]
-#
-#    plt.plot(dst_rows, dst_cols,'.y')
-#    #    left, top, right, bottom = newPos
-#    plt.xlim((0,int(img_x)))
-#    plt.ylim((0,int(img_y)))
-#    plt.imshow(out)
+#     plt.figure()
+#     dst_rows, dst_cols = tform.inverse(src)[:, 0], tform.inverse(src)[:, 1]
+
+#     plt.plot(dst_rows, dst_cols,'.y')
+#    #left, top, right, bottom = newPos
+#     plt.xlim((0,int(img_x)))
+#     plt.ylim((0,int(img_y)))
+#     plt.imshow(out)
 
 #    rescale image from [0,1] to [0, 255]
     out = Image.fromarray(np.uint8(out*255))
@@ -138,7 +138,7 @@ def bndbox_transform(label_pos, tform):
 if __name__ == '__main__':  
     global pad_left
     image = data.astronaut()
-    image = Image.open('/home/pohsuanh/Documents/Marathon2017/templates/03.png')
+    image = Image.open(os.path.join(os.getcwd(),'templates/03.png'))
     label_pos = [  100, 100, 300, 300]
     
     out, tform =img_transform(image)
@@ -168,4 +168,4 @@ if __name__ == '__main__':
     tline = np.dstack([x.flat, y.flat])[0]
     plt.plot(tform.inverse(tline)[:, 0], tform.inverse(tline)[:, 1] ,'.b')
     plt.imshow(out)
-
+    plt.show()

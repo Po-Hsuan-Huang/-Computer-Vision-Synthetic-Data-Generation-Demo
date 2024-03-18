@@ -131,7 +131,7 @@ def draw_shade(imput_img, num_leaf, **kwargs):
     black_im = Image.new('RGBA', screen.size, color = 0 )#  color = 0 : black
     black_im.putalpha(mask)
     # paste template at the center of the screen
-    screen.paste(temp,( screen_w/2 - temp_w/2, screen_h/2 - temp_h/2))
+    screen.paste(temp,( int(screen_w/2 - temp_w/2), int(screen_h/2 - temp_h/2)))
     
     #composite screen and shades
     screen = Image.alpha_composite(screen, black_im)

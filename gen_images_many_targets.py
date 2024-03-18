@@ -158,7 +158,7 @@ def gen_target_img(img, bndboxs, filename, font_list, bg_list):
     img, bndboxs = transform.perspective(img, bndboxs)
     img, bndboxs = transform.ripple(img, bndboxs)
 #    img, bndboxs = transform.flag(img, bndboxs)
-#    img, bndboxs = transform.rotation(img, bndboxs)
+    img, bndboxs = transform.rotation(img, bndboxs)
 
 
     return img, bndboxs
@@ -337,7 +337,7 @@ def paste_target_on_background(img_list, bg, newPos_list, num_grid):
             
             #--------------------------------------------------------------------------
             # Whether to draw bounding boxes on the screen.
-            isDraw = False
+            isDraw = True
             
             if isDraw :   
             #---Draw bbox on bg---
@@ -371,9 +371,9 @@ def paste_target_on_background(img_list, bg, newPos_list, num_grid):
                     d.line((bbox_x1, bbox_y2, bbox_x2, bbox_y2), fill=(0,255,0,255), width=4)
                     d.line((bbox_x2, bbox_y1, bbox_x2, bbox_y2), fill=(0,255,0,255), width=4)
 
-#    fig, ax = plt.subplots()
-#    
-#    plt.imshow(bg)
+    # fig, ax = plt.subplots()
+   
+    # plt.imshow(bg)
     
     return pastePos_list, newPos_list, img_list, bg
 #%% Create .xml of image---
@@ -419,10 +419,10 @@ def create_xml(pastePos_list, img_list, newPos_list, font_path_list, bg, code_li
     mean = np.random.uniform(0, 0.003)
     var = np.random.uniform(0.00001, 0.0005)
     bg = util.random_noise(bg, mode='gaussian', mean=mean, var=var)
-    
+    bg = (bg * 255).astype(np.uint8)
     
 #    io.imsave('./JPEGImages/TestSet2'+ filename +'.jpg', bg,  quality=90)
-    io.imsave(DATA_PATH + filename +'.jpg', bg,  quality=90)
+    io.imsave(DATA_PATH + filename +'.jpg', bg[:,:,:3],  quality=90)
 
     return
 #--------------------------------------------------------------------------
@@ -451,18 +451,19 @@ def GenData_many_targets(img_num, initial_name, data_path, label_path, text_path
     DATA_PATH = data_path   # path for JPEGImages
     LABEL_PATH = label_path # path for Annotations
     # path for ImageSet
-    target_src_path = '/home/pohsuanh/Documents/Marathon2017/data/raw_targets2/'
+    target_src_path = os.path.join(os.getcwd(),'Marathon2017/data/raw_targets2/')
 
     DATA_PATH = data_path
     LABEL_PATH = label_path
     
     font_list = glob.glob('./font/*.*')
-#    bg_list = glob.glob('./background/bg_train_sets/*.jpg')
-#    bg_list = glob.glob('./data/background/*.jpg')
+
     bg_list = []
-    for root, dirnames, filenames in os.walk('./background/'):
-        for filename in fnmatch.filter(filenames, '*.jpg'):
-            bg_list.append(os.path.join(root, filename))    
+    for root, dirnames, filenames in os.walk(os.path.join(os.getcwd(),'background')):
+        extensions = ['*.jpeg','*.jpg','*.png']
+        for ext in extensions:
+            for filename in fnmatch.filter(filenames, ext):
+                bg_list.append(os.path.join(root, filename))    
 
 
     # path to the remote folder for synchronizing
@@ -470,7 +471,7 @@ def GenData_many_targets(img_num, initial_name, data_path, label_path, text_path
 #    os.remove('/home/lab/Documents/Marathon/' + 'sync.sh')
     sync_data_dst = '/home/pohsuanh.huang/pva-faster-rcnn/data/VOCdevkit2007/sycfolder/JPEGImages' 
     sync_label_dst ='/home/pohsuanh.huang/pva-faster-rcnn/data/VOCdevkit2007/sycfolder/Annotations'
-    with open( '/home/pohsuanh/Documents/Marathon/' + 'sync.sh',"w") as fo:
+    with open( os.path.join(os.getcwd(),'Marathon2017/', 'sync.sh'),"w") as fo:
         
         fo.writelines(['#!/bin/sh\n', 
                        '# open -u <user> <password> <host url>; mirror -c -R -L <path from> <path to>\n',
@@ -498,7 +499,7 @@ def GenData_many_targets(img_num, initial_name, data_path, label_path, text_path
             
             
             #%%
-            num_grid = np.random.randint(2,4) 
+            num_grid = np.random.randint(4,5) 
             
             max_num_img = math.pow(num_grid, 2)
             # number of targets must be less then number of grid cells
@@ -512,7 +513,7 @@ def GenData_many_targets(img_num, initial_name, data_path, label_path, text_path
             
             # init variables
 #            img, code_x, code_y, CodeWidth_En, CodeHeight_En, CodeWidth_Nb, CodeHeight_Nb,font_path, code = gen_raw_img(font_list)
-            q = glob.glob('./data/raw_targets2/raw_targets*.p')
+            q = glob.glob(os.path.join(os.getcwd(),'Marathon2017/data/raw_targets2/raw_targets*.p'))
             for i in range(num_img):
                 
                 # Generate raw target sets     
@@ -544,7 +545,7 @@ def GenData_many_targets(img_num, initial_name, data_path, label_path, text_path
             # folder sync fromo local to remote 
             if SYNC:
                 if code_no % SyncBatchSize == 0 and SyncBatchSize != 0:
-                    subprocess.call('/home/pohsuanh/Documents/Marathon2017/' + 'sync.sh')
+                    subprocess.call(os.path.join(os.getcwd(),'Marathon2017', 'sync.sh'))
                     
 
 
@@ -555,11 +556,11 @@ if __name__ == '__main__':
     img_num = 10
     initial_name = 10    
 # trian annotation data path
-    label_path = '/home/pohsuanh/disk1/Marathon/Annotations/test/' 
+    label_path = os.path.join(os.getcwd(),'Marathon2017/Annotations/test/') 
 # train_data_output_path
-    data_path = '/home/pohsuanh/disk1/Marathon/JPEGImages/test/'
+    data_path = os.path.join(os.getcwd(),'Marathon2017/JPEGImages/test/')
 # train_data_output_path
-    txt_path = '/home/pohsuanh/disk1/Marathon/ImageSets/Main/' 
+    txt_path = os.path.join(os.getcwd(),'Marathon2017/ImageSets/Main/')
     start = time.perf_counter()
     GenData_many_targets(img_num, initial_name, data_path, label_path, txt_path)
     end = time.perf_counter()

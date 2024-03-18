@@ -11,6 +11,16 @@ Generate raw target images and pickle them in format {raw_target_%f}.p.
 """
 
 import os, sys, time
+ # Get the directory containing the script
+script_dir = os.path.dirname(os.path.realpath(__file__))
+
+# Add the script directory to the Python path
+sys.path.append(script_dir)
+
+os.chdir(os.path.dirname(os.path.realpath(__file__)))
+
+cwd = os.getcwd()
+sys.path.extend([os.path.join(cwd, "lib/image"), os.path.join(cwd, "lib/transform/util")])
 import matplotlib.pyplot as plt
 from multiprocessing import Process, cpu_count, JoinableQueue
 import math
@@ -20,7 +30,6 @@ from skimage import util, img_as_float, io
 import glob		
 import shadeLeaves, texture, flag_transform, perspective_transform	
 from Any2VOC_function_many_targets import *
-from string import join
 import pickle as pickle
 
 
@@ -33,7 +42,7 @@ def gen_code():
     '''produce number code'''
     Nu = np.random.randint(0,10,5)
 #    Nu =np.random.choice(list('ABCD'), size=5)
-    N_code  = join( [str(i) for i in list(Nu)],sep ='')
+    N_code  = "  ".join( [str(i) for i in list(Nu)])
     
     return(E_code, N_code)
 #%%
@@ -69,7 +78,9 @@ def gen_raw_img(font_list):
     
     #---Get the related info of font. 
     '''code_w and code_h are objects not variable.'''
-    code_w, code_h = font.getsize(code)
+    l, t, r, b = font.getbbox(code)
+    # Use the draw object to measure the text size
+    code_w, code_h = abs(l-r), abs(t-b)
     
     #--------------------------------------------------------------------------
     
@@ -81,7 +92,7 @@ def gen_raw_img(font_list):
     
     #---Open runner id template-----------------------------------------------
     # randomely choose one of the 6 templates.
-    filepath = './templates/' + templates[colorboard.index(sample)] 
+    filepath = os.path.join(cwd , 'templates', str(templates[colorboard.index(sample)])) 
     img = Image.open(filepath)
     img = img.resize((img_size_w, img_size_h))
 
@@ -89,8 +100,11 @@ def gen_raw_img(font_list):
     d = ImageDraw.Draw(img)
     
     # font size of C_code 
-    CodeWidth_En, CodeHeight_En = d.textsize(C_code,font)
-    CodeWidth_Nb, CodeHeight_Nb = d.textsize(N_code,font)
+    l, t, r, b= d.textbbox((0,0),C_code, font= font)
+    CodeWidth_En, CodeHeight_En = abs(l-r), abs(t-b)
+
+    l, t, r, b= d.textbbox((0,0),N_code, font= font)
+    CodeWidth_Nb, CodeHeight_Nb = abs(l-r), abs(t-b)
     CodeWidth_Nb = CodeWidth_Nb/5
     
     code_x = (img_size_w-code_w)/2  
@@ -160,22 +174,24 @@ if __name__ == '__main__':
 
     
     #%% Main Function
-    SingleProcess = False
+    SingleProcess = True
     
     if SingleProcess:  
-        start = time.time()    
-        dst_path = '/home/pohsuanh/Documents/Marathon2017/data/raw_targets2/'
-        font_list = glob.glob('./font/*.*')
-        
+        start = time.time()
+        cwd = os.getcwd() 
+        dst_path = os.path.join(cwd,'Marathon2017/data/raw_targets2/' )
+        if not os.path.isdir(dst_path):
+            os.makedirs(dst_path)
+        font_list = glob.glob(os.path.join(cwd,'font/*.otf'))
         init_num = 0
         
         for i in range(10):
             j = init_num + i + 1
             
             img, code_x, code_y, CodeWidth_En, CodeHeight_En, CodeWidth_Nb, CodeHeight_Nb,font_path, code = gen_raw_img(font_list)
-    #        fig, ax = plt.subplots()
-    #        ax.imshow(img)
-    #        plt.show()  
+            fig, ax = plt.subplots()
+            ax.imshow(img)
+            plt.show()  
             filename = '{:05d}'.format(j)
     #        print 'filename ', filename
             pickle.dump( [img, code, font_path, code_x, code_y, CodeWidth_En, CodeHeight_En, CodeWidth_Nb, CodeHeight_Nb], open( dst_path + "raw_targets_" + filename +".p", "wb" ) )
@@ -191,9 +207,12 @@ if __name__ == '__main__':
         job_queue = JoinableQueue()
             
         start = time.time()
-        
-        dst_path = '/home/pohsuanh/Documents/Marathon2017/data/raw_targets2/'
-        font_list = glob.glob('./font/*.*')
+        cwd = os.getcwd() 
+        dst_path = os.path.join(cwd,'Marathon2017/data/raw_targets2/' )
+        if not os.path.isdir(dst_path):
+            os.mkdir(dst_path)
+        font_list = glob.glob(os.path.join(cwd,'font/*.*'))
+
         process_list = []
     
         num= 50000

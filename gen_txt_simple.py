@@ -42,7 +42,7 @@ stop  = 100000
 dest = 'test.txt'
 
 #files = sorted(glob.glob('/home/pohsuanh/Documents/Marathon2017/data/Annotations/TrainSet'+str(folder)+'/*.xml' ))
-#files = sorted(glob.glob('/home/pohsuanh/disk1/Marathon/testImages/*jpg' ))
+#files = sorted(glob.glob(os.path.join(os.path.getcwd(),'/testImages/*jpg' ))
 #src_path ='/home/pohsuanh/Documents/Marathon2017/tag_pics/realpho2016phone/'
 src_path ='/home/pohsuanh/Desktop/test/'
 
@@ -73,7 +73,7 @@ with open(dest_path + dest, 'w') as g:
         for x in files:
             x = x.split('.xml')[0]
             x = x.split(src_path)[1]
-#            x = x.split('/home/pohsuanh/disk1/Marathon/testImages/')[1]
+#            x = x.split(os.path.join(os.path.getcwd(),'/testImages/')[1]
             x = int(x)
             filename = '{:08d}'.format(x)
             

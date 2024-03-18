@@ -13,8 +13,8 @@ junkxml.txt is created with test.py on server169 root dir.
 
 """
 
-f = open('/home/pohsuanh/disk1/Marathon/ImageSets/Main/5/junkxml.txt', 'r')
-h = open('/home/pohsuanh/disk1/Marathon/ImageSets/Main/5/junkxml2.txt', 'w')
+f = open(os.path.join(os.path.getcwd(),'/ImageSets/Main/5/junkxml.txt', 'r')
+h = open(os.path.join(os.path.getcwd(),'/ImageSets/Main/5/junkxml2.txt', 'w')
 word = ''
 for i, text in enumerate(list(f.readline())):
     i=i+1

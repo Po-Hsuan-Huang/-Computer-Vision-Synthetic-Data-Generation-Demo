@@ -20,11 +20,11 @@ if __name__=='__main__':
     initName = 750000
     imgNum = 10
     
-    imgList = sorted(glob.glob('/home/pohsuanh/disk1/Marathon/JPEGImages/TrainSet5/*jpg'))[13457:imgNum+13457]
-    xmlList = sorted(glob.glob('/home/pohsuanh/disk1/Marathon/Annotations/TrainSet5/*xml'))[13457:imgNum+13457]
+    imgList = sorted(glob.glob(os.path.join(os.path.getcwd(),'/JPEGImages/TrainSet5/*jpg'))[13457:imgNum+13457]
+    xmlList = sorted(glob.glob(os.path.join(os.path.getcwd(),'/Annotations/TrainSet5/*xml'))[13457:imgNum+13457]
      
-    img_dst_path = '/home/pohsuanh/disk1/Marathon/JPEGImages/TrainSet6/'
-    xml_dst_path = '/home/pohsuanh/disk1/Marathon/Annotations/TrainSet6/'
+    img_dst_path = os.path.join(os.path.getcwd(),'/JPEGImages/TrainSet6/'
+    xml_dst_path = os.path.join(os.path.getcwd(),'/Annotations/TrainSet6/'
     
     Hue = False
     Saturation = False
@@ -33,14 +33,14 @@ if __name__=='__main__':
     
     for j , img in enumerate(imgList):
         
-        xmltag = xmlList[j].lstrip('/home/pohsuanh/disk1/Marathon/Annotations/TrainSet5/').rstrip('.xml')
-        imgtag =imgList[j].lstrip('/home/pohsuanh/disk1/Marathon/JPEGImages/TrainSet5/').rstrip('.jpg')
+        xmltag = xmlList[j].lstrip(os.path.join(os.path.getcwd(),'/Annotations/TrainSet5/').rstrip('.xml')
+        imgtag =imgList[j].lstrip(os.path.join(os.path.getcwd(),'/JPEGImages/TrainSet5/').rstrip('.jpg')
         print(imgtag)
         if xmltag == imgtag:
             
             
             img = cv2.imread(img)
-#            img = cv2.imread('/home/pohsuanh/disk1/Marathon/JPEGImages/TrainSet5/0400010.jpg')
+#            img = cv2.imread(os.path.join(os.path.getcwd(),'/JPEGImages/TrainSet5/0400010.jpg')
             hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
             hsv2 = hsv.copy()
             if Hue :
