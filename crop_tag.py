@@ -124,8 +124,8 @@ def namer(path, i ,src, dst):
     
 if __name__ == '__main__':
     GT = False
-    src = os.path.join(os.getcwd(),'Marathon2017/detections/detects-phone2016/')
-    dst_folder = os.path.join(os.getcwd(),'Marathon2017/tag_pics/realpho2016phone/')
+    src = os.path.join(os.getcwd(),'Marathon2017/detections/')
+    dst_folder = os.path.join(os.getcwd(),'Marathon2017/tag_pics/')
 
     src_annot = 'Annotations'
     src_img =  'Images'    

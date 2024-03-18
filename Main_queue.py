@@ -85,12 +85,12 @@ if __name__ == '__main__':
     
     Gen_train_data = True
     Gen_test_data = False
-    SingleProcess = True
+    SingleProcess = False
     Overwrite = True
     SYNC = False
     # number of training data 
     
-    train_num = 5
+    train_num = 500
     
     # number of testing data
     
@@ -98,10 +98,10 @@ if __name__ == '__main__':
     
     # batchsize sync to remote
     
-    SycBatchSize = 200
+    SycBatchSize = 20
     
     # initial name for training
-    Initial_name_train = 50300
+    Initial_name_train = 0
     
     # initial name for testing
     Initial_name_test = train_num
@@ -216,7 +216,7 @@ if __name__ == '__main__':
 
         ''' Generate data'''
             
-        for p in range(2*cpu_count()-1): # PROCESS_NUM
+        for p in range(2*cpu_count()-2): # PROCESS_NUM
              job_queue.put(None)
              process = Worker(job_queue)
              process_list.append(process)  
