@@ -1,5 +1,5 @@
 # Vanilla Image Generating Toolkit.
-
+![Tool Overview](demo_imgs/tool_overview.png)
 ### The toolkit allows you to generate image data and annotations(bounding boxes) necessary for number detection for tags of various textures, shades, and geometry. For example, you can generate car plates, marathon tag cloth in simulated environment.The data then can be trimmed to comply with the format of https://github.com/sanghoon/pva-faster-rcnn to train pva-net-faster-rcnn model.  
 
 ## Noticable updates in this release :
@@ -10,10 +10,9 @@
     please clone release branches
 ## Data synthesis
 
+1. run **gen_raw_targets.py** generate raw targets as .p assets under the Marathon2017/data/raw_targets2/ that will later be pasted on backgound iamges. Change the parameter to use multiprocessing.
 
-1. run **gen_raw_targets.py** generate raw targets that will be pasted on backgounds
-
-2. run **Main_queue.py** after specifying the source and destination directories in this file. Recommend to run this code from shell because it takes long time (24 hours for 50k pics).
+2. run **Main_queue.py** after specifying the source and destination directories in this file. Recommend to run this code from shell because it takes long time (24 hours for 50k pics). Change the parameters to specify whether to generate test_set, use multiprocessing, overwrite, or synchornize. The generated images will be saved at Marathon217/JPEGImages. The generated bounding box annotations will be saved at Marathon2017/Annotations/
 
 3. run **gen_text_simple.py** generate trainval.txt and test.txt indicating data indecies.
 
