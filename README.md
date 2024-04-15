@@ -1,4 +1,4 @@
-# High Throughput, Realistic Data-Augmentation Toolkit for Opitical Digit Detection on Fabrics in Outdoors Enviroment 
+# High Throughput, Realistic Data-Augmentation Toolkit for Optical Digit Detection on Fabrics in Outdoors Envinroment 
 
 ![Tool Overview](demo_imgs/tool_overview.png)
 
@@ -8,14 +8,20 @@
 
 *Training protocols with generated augmented images to enhance model performance*
 ## Description 
-The toolkit allows you to generate image data and annotations(bounding boxes) necessary for number detection for tags of various textures, colors, and geometry. For example, you can generate car plates, marathon tag cloths in simulated environments.The data then can be cropped to comply with the data format of PASCAL Object Dectection Competition (http://host.robots.ox.ac.uk/pascal/VOC/). You can use this toolkit to generate millions of photos for model fine-tuning. 
+This toolkit enables the generation of image data and annotations (bounding boxes) necessary for number detection on tags of various textures, colors, and geometries. For instance, you can generate images of car plates and marathon tags in simulated environments. The data can then be cropped to comply with the data format of the PASCAL Object Detection Competition (http://host.robots.ox.ac.uk/pascal/VOC/). This toolkit is capable of generating millions of photos for model fine-tuning.
+
 
 ### Procedure
 
 ## Dependencies:
-### OpenCV, PIL, SKimage, Numpy, Matplotlib
+- OpenCV
+- PIL
+- skimage
+- Numpy
+- Matplotlib
+- 
 ## Installation
-To install the required dependencies, run the following command:
+Install the required dependencies with the following command:
 
 ```bash
 pip install -r requirements.txt
@@ -24,173 +30,74 @@ pip install -r requirements.txt
 
 ## Usage
 
-1. run **gen_raw_targets.py** generate raw targets as .p assets under the Marathon2017/data/raw_targets2/ that will later be pasted on backgound iamges. Change the parameter to use multiprocessing.
+1. Run `gen_raw_targets.py` to generate raw targets as .p assets under `Marathon2017/data/raw_targets2/`. These will later be pasted onto background images. Modify the parameter to use multiprocessing.
 
-2. run **Main_queue.py** after specifying the source and destination directories in this file. Recommend to run this code from shell because it takes long time (24 hours for 50k pics). Change the parameters to specify whether to generate test_set, use **multiprocessing, overwrite, or synchornize**. The generated images will be saved at **Marathon217/JPEGImages**. The generated bounding box annotations will be saved at **Marathon2017/Annotations/**. 
+2. Run `Main_queue.py` after specifying the source and destination directories in this file. It is recommended to run this code from the shell because it takes a long time (24 hours for 50k pics). Modify the parameters to specify whether to generate a test set, use multiprocessing, overwrite existing files, or synchronize the process. The generated images will be saved in `Marathon217/JPEGImages`. The generated bounding box annotations will be saved in `Marathon2017/Annotations/`.
 
-3. run **gen_text_simple.py** generate trainval.txt and test.txt indicating data indecies.
+3. Run `gen_text_simple.py` to generate `trainval.txt` and `test.txt` indicating data indices.
 
-## Number detection
-1. load pretrained weights for tag detections and run test.py on pva-faster-rcnn, get 'detections.pkl'
+## Number Detection
+1. Load pretrained weights for tag detections and run `test.py` on `pva-faster-rcnn` to get `detections.pkl`.
 
-2. run **crop_tag.py** to crop tags from raw images. Put cropped tags images and filenames.txt on server before step detection.
+2. Run `crop_tag.py` to crop tags from raw images. Store cropped tag images and `filenames.txt` on the server before step detection.
 
-3. load pretrained weights for number detections and run test.py pva-faster-rcnn, get 'detections.pkl'. The model is not included in the repo. See https://github.com/sanghoon/pva-faster-rcnn to train pva-net-faster-rcnn model.  
+3. Load pretrained weights for number detections and run `test.py` on `pva-faster-rcnn` to get `detections.pkl`. The model is not included in the repo. See https://github.com/sanghoon/pva-faster-rcnn to train the `pva-net-faster-rcnn` model.
 
-4. run **find_num_bg.py** to generate the final result. That is, the detected text and bouding boxes on raw images. 
+4. Run `find_num_bg.py` to generate the final results, which include the detected text and bounding boxes on raw images.
 
---------------------------------------------------------------------------------------------------------------------
+## Main Functions:
+- `Main.py`: Generates JPEG images and annotations.
+- `Main_queue.py`: A multiprocessing version of `Main.py` that accelerates the speed of data synthesis.
 
-3. [alternative] run **gen_text.py** to genereated .txt files indicating traing and evaluation set to the maching.
+## Folder and Module Organization
 
-## Main functions :
+### Image Labeling Modules
+These modules are independent and should be imported into the main function as needed. Each performs distinct tasks related to image labeling:
 
-    * Main.py : 
-    
-      The MAIN file that generate Jpeg images and annotations. 
-      
-    * Main_queue.py :
-    
-      multiprocessing version of MAIN file. Accelerate speed of data synthesis.
+- **gen_raw_targets.py**: Generates raw target assets (.p files) for later use in background images. Saves synthesized images and the locations of each character.
+- **gen_images.py**: Pastes a single target image onto a background image.
+- **gen_images_many_targets.py**: Pastes multiple transformed target images onto a background image, assigning them to arbitrary grid cells.
 
+### Annotation Modules
+Creates XML files that can be read by CNNs for object recognition tasks:
 
-* Image labeling mudules: 
-      
-     These are the only mudules that should be imported to the main function. Each of them are independent example doing different things. read the header of the mudule.
+- **Any2VOC_function.py**: Utilized by gen_image.py to create annotations.
+- **Any2VOC_function_many_targets.py**: Used by gen_images_many_targets.py to handle multiple targets.
 
-      
-    * gen_raw_targets.py : 
-    
-      Synthesize images with text on it. The 4-tuple location of each character of the text you choose and the synthesized images are pickled and saved for later use. 
-      
-    * gen_images.py
-    
-      Paste one target image on the background image.
-    
-    * gen_images_many_targets.py :
-    
-      Paste multiple transformed target images on the background image. The targets are arbituarily assigned to the cells of gridmesh on top of the background. 
-      
-* Annotation modules :
-   Create an .xml file that can be read by CNNs as labels of images for object recognition tasks.
-   
-   * Any2VOC_function.py :
-      
-      The module is used by gen_image.py
-      
-   * Any2VOC_function_many_targets.py
-      
-      The module is used by gen_image_many_targets.py
+### Tools
+Contains scripts for evaluating loss functions, detections, and object counts:
 
-# FOLDERS:
+- **loss/extract.sh**: Extracts and plots loss function over time from test.log.
+- **plot_test.py**: Plots bounding boxes on test images; outputs stored in `/detections/detects-real2017/output`.
+- **histogram.py**: Counts the number of objects per class in the dataset.
+- **evaluation/main_eval.py**: Evaluates the accuracy of predictions versus ground truths for each class.
 
-## fix_tools/
-*fix faulty txt files.
+### Image Processing Modules
+Provides tools for adding effects and transformations to images:
 
-   *  run **filter.py** to weed out fauty images, whose target's bounding box stick outside the background.
-      The bounding boxes are supposed to be insdie the background image in the latest version. The broken data's                             indicies are stored in broken.txt 
-     
-      
-   *  run **renamefile.py** to rename the filenames by a systemic pattern.
+- **shadeLeaves.py**: Adds shading effects to images.
+- **texture.py**: Applies predefined textures like scratches, stains, and fabric effects.
+- **HSL.py**: Contains functions for adjusting hue, brightness, sharpness, and contrast.
+- **oneLeaf.py** [Obsolete]: Prototype of shadeLeaves.py.
+- **gradient_triangle** [Obsolete]: Adds half-transparent triangles to images.
 
-## tools/
-*evaluate loss function curve, detection, and hit counts.
+### Transform Modules
+Includes functions for geometric transformations of images and bounding boxes:
 
-   * run **loss/sh extract.sh test.log** to plot loss function overtime.
+- **transform.py**: Base module for image transformations.
+    - **perspective_transform.py**: Applies perspective transformations.
+    - **flag_transform.py**: Converts images to a flag-like appearance with adjusted bounding boxes.
+    - **ripple_transform.py**: Adds ripple effects.
+    - **rotate_transform.py**: Rotates images and adjusts bounding boxes accordingly.
 
-   * run **plot_test.py** to plot bounding boxes of the detectoins on test images. The resulting images will be stored in /detections/detects-real2017/output.
+### Fix Tools
+Scripts for correcting data issues:
 
-   * histogram.py : 
-     Count numbers of objects in the dataset of each class.    
+- **filter.py**: Identifies and removes images with bounding boxes that exceed background boundaries. Stores indices of problematic data in broken.txt.
+- **renamefile.py**: Renames files systematically to ensure consistency.
 
-   * run **evaluation/main_eval.py** to evaluate the counts of correct predicts and ground truths of each classes. 
+### Texture Template Generator
+Tools for managing texture templates:
 
-## lib/image/
-*Image processing tools.
-
-   * shadeLeaves.py :
-      
-      Add shades on your images.
-
-   * texture.py :
-      
-      Add predefined texture on your images. Scratches, Stain, Crumble, Fabric textures are offered. 
-       
-   * HSL.py : 
-   
-      a module contianing image processing functions hue(), brightness(), sharpness(), contrast().
-          
-   * hue.py : [obsolete] 
-      
-      Data augmentation. 
-      Generatate x N amounts of data. birghtness, blur, sharpness is processed in the data generation already.
-      Changing hue is not suppose to improve the training result.
-      
-   * oneLeaf.py :[obsolete] 
-    
-      A prototype version of shadeLeaves.py.
-    
-   * gradient_triangle : [obsolete] 
-    
-      Add black half-transparent triangles on your images.
-
-## lib/transform/
-* Image transform tools.
-
-   * transform.py :
-        The module containing functions that geometrically transform the images and bounding boxes.
-        
-        *subfunctions
-        
-          * perspective_transform.py :
-
-            Perspective transform to images and bounding boxes.
-
-          * flag_transform.py :
-
-            Transform a flat image into a flag-like image, and recalculate locations and size of bounding boxes.
-
-          * ripple_transform.py:
-
-          * rotate_trasform.py:
-
-
-##  OTHER FILES IN ROOT FOLDER
-
-* Texture template generating tool :
-
-    * gen_texture_grayscale.py :
-    
-      Extract alpha channel of the texture template images.
-
-   
-   * gen_text.py :
-    
-     This file shall only be run after running filter.py. Generate .txt files needed for fastrcnn training.
-     ImageSetss/Main/trainval.txt, ImageSet/Main/test.txt are two index files telling which image to be used during training and testing. This help weed out faulty data points. 
-
-
-
-
-------------------------------------------------------------------------------------------------------------------
-     
-    
-## Note
-
-
-  5. Adding alpha shading and texture on the original image.
-``` # add shades
-    img = shadeLeaves.draw_shade(img, 2)
-    # add textures
-    img =texture.draw_shade(img, 'crumple')
-    img =texture.draw_shade(img, 'spray')
-    img =texture.draw_shade(img, 'stain')
-    img =texture.draw_shade(img, 'fabric')
-```
-## The background image source should be modifeid to direct to your source images
-
-In file GenData_many_targets.py
-
-bg_list = glob.glob('./background/VJS2016TESTSET/1107photo/*.jpg')
-bg_list = bg_list + bg_list2 + bg_list3
-
+- **gen_texture_grayscale.py**: Extracts the alpha channel from texture template images.
+- **gen_text.py**: Generates .txt files required for training after running filter.py, specifying which images to use for training and testing, helping to exclude faulty data points.
